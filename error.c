@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 15:18:41 by tafocked          #+#    #+#             */
-/*   Updated: 2024/10/18 18:50:40 by tafocked         ###   ########.fr       */
+/*   Created: 2024/10/18 18:15:26 by tafocked          #+#    #+#             */
+/*   Updated: 2024/10/18 18:33:43 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+int	err_msg(int err)
 {
-	int		err;
-	t_map	map;
-
-	if ((err = arg_checker(argc, argv, &map)))
-		return (err);
-	ft_printf("screen\n");
+	if (err != 0)
+		errno = err;
+	ft_putstr_fd("Error : ", STDERR_FILENO);
+	ft_putstr_fd(strerror(errno), STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+	return (errno);
 }
