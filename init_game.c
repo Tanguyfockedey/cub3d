@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 15:18:41 by tafocked          #+#    #+#             */
-/*   Updated: 2024/10/21 17:59:20 by tafocked         ###   ########.fr       */
+/*   Created: 2024/10/21 16:59:39 by tafocked          #+#    #+#             */
+/*   Updated: 2024/10/21 20:14:36 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+int	init_game(t_game *g, t_map *map)
 {
-	int		err;
-	t_map	map;
-	t_game	game;
-
-	err = arg_checker(argc, argv, &map);
-	if (err)
-		return (err);
-	err = init_game(&game, &map);
-	if (err)
-		return (err);
-	
+	print_map(map);
+	g->mlx = mlx_init();
+	if (!g->mlx)
+		return (err_str("Initialisation of mlx failed.", 1));
+	g->mlx_win = mlx_new_window(g->mlx, WIDTH, HEIGHT, "Cub3d");
+	if (!g->mlx_win)
+		return (err_str("Initilisation of window failed.", 1));
+	mlx_loop(g->mlx);
+	return (0);
 }

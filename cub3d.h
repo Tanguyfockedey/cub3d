@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/10/18 18:22:27 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:57:28 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,31 @@
 
 typedef struct s_map
 {
-	unsigned char	floor[3];
-	unsigned char	ceiling[3];
+	int		floor[3];
+	int		ceiling[3];
+	int		width;
+	int		height;
+	char	*tiles;
+
 }	t_map;
 
-int	arg_checker(int argc, char **argv, t_map *map);
-int	err_msg(int ret);
+typedef struct s_game
+{
+	void	*mlx;
+	void	*mlx_win;
+
+}	t_game;
+
+
+/* Parser */
+int		arg_checker(int argc, char **argv, t_map *map);
+
+/* Game */
+int		init_game(t_game *game, t_map *map);
+
+/* Utils */
+int		err_val(int ret);
+int		err_str(char *str, int ret);
+void	print_map(t_map *map);
 
 #endif
