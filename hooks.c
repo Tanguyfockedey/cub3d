@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 15:18:41 by tafocked          #+#    #+#             */
-/*   Updated: 2024/10/22 15:50:19 by tafocked         ###   ########.fr       */
+/*   Created: 2024/10/22 13:44:36 by tafocked          #+#    #+#             */
+/*   Updated: 2024/10/22 13:56:31 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+int	close_hook(void)
 {
-	int		err;
-	t_game	game;
+	exit(0);
+	return (0);
+}
 
-	err = arg_checker(argc, argv, &game.map);
-	if (err)
-		return (err);
-	err = init_game(&game);
-	if (err)
-		return (err);
-	cast_rays(&game);
-	mlx_loop(game.window.mlx);
-
+int	key_hook(int hook, t_game *g)
+{
+	if (hook == ESC)
+		exit(0);
+	(void)g;
+	return (0);
 }

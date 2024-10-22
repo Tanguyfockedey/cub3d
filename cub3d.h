@@ -6,13 +6,14 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/10/21 19:57:28 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/10/22 19:04:15 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+/* Includes */
 # include "includes/libft_updated/libft.h"
 # include "includes/libft_updated/printf/ft_printf.h"
 # include <mlx.h>
@@ -34,22 +35,58 @@
 # define RIGHT 124
 # define DOWN 125
 # define UP 126
+# define R_LEFT 
+# define R_RIGHT
 
 typedef struct s_map
 {
-	int		floor[3];
-	int		ceiling[3];
-	int		width;
-	int		height;
-	char	*tiles;
-
+	int			floor[3];
+	int			ceiling[3];
+	int			width;
+	int			height;
+	char		*tiles;
+	//N E S W walls
 }	t_map;
+
+typedef struct s_window
+{
+	int			width;
+	int			height;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	void		*addr;
+	int			bpp;
+	int			size_line;
+	int			endian;
+}	t_window;
+
+typedef struct s_ray
+{
+	double		dir_x;
+	double		dir_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+}	t_ray;
+
+typedef struct s_player
+{
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+	double		camera_x;
+	// t_ray		*rays;
+}	t_player;
 
 typedef struct s_game
 {
-	void	*mlx;
-	void	*mlx_win;
-
+	t_window	w;
+	t_map		m;
+	t_player	p;
+	t_ray		r;
 }	t_game;
 
 
@@ -57,7 +94,10 @@ typedef struct s_game
 int		arg_checker(int argc, char **argv, t_map *map);
 
 /* Game */
-int		init_game(t_game *game, t_map *map);
+int		init_game(t_game *game);
+int		close_hook(void);
+int		key_hook(int hook, t_game *g);
+void	cast_rays(t_game *g);
 
 /* Utils */
 int		err_val(int ret);
