@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:59:39 by tafocked          #+#    #+#             */
-/*   Updated: 2024/10/22 19:01:43 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/10/23 20:26:31 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ static int	init_window(t_game *g, t_window *w)
 	mlx_hook(w->win, 17, 0, close_hook, g);
 	return (0);
 }
+
 static int	init_player(t_game *g, t_player *p)
 {
-	p->pos_x = 3.5;
-	p->pos_y = 6.5;
-	p->dir_x = -1.;
-	p->dir_y = 0.;
-	p->plane_x = 0.;
+	p->pos_x = 5;
+	p->pos_y = 7;
+	p->dir_x = -1;
+	p->dir_y = 0;
+	p->plane_x = 0;
 	p->plane_y = 0.66;
 	(void)g;
 	return (0);

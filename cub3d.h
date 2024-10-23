@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/10/22 19:04:15 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/10/23 20:09:19 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
+# include <limits.h>
 # include <string.h>
 # include <errno.h>
 # include <stdio.h>
 
 /* Screen resolution */
-# define WIDTH 1280
-# define HEIGHT 720
+# define WIDTH 1920
+# define HEIGHT 1080
 
 /* Key bindings */
 # define ESC 53
@@ -65,8 +66,17 @@ typedef struct s_ray
 {
 	double		dir_x;
 	double		dir_y;
+	double		side_dist_x;
+	double		side_dist_y;
 	double		delta_dist_x;
 	double		delta_dist_y;
+	double		perp_wall_dist;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			side;
 }	t_ray;
 
 typedef struct s_player
@@ -89,7 +99,6 @@ typedef struct s_game
 	t_ray		r;
 }	t_game;
 
-
 /* Parser */
 int		arg_checker(int argc, char **argv, t_map *map);
 
@@ -98,6 +107,8 @@ int		init_game(t_game *game);
 int		close_hook(void);
 int		key_hook(int hook, t_game *g);
 void	cast_rays(t_game *g);
+void	draw_wall(t_game *g, int col);
+void	render(t_game *g);
 
 /* Utils */
 int		err_val(int ret);
