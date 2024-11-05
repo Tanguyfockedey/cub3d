@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:59:39 by tafocked          #+#    #+#             */
-/*   Updated: 2024/10/23 20:26:31 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/05 19:10:20 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static int	init_window(t_game *g, t_window *w)
 
 static int	init_player(t_game *g, t_player *p)
 {
-	p->pos_x = 5;
-	p->pos_y = 7;
+	p->pos_x = 7;
+	p->pos_y = 3;
 	p->dir_x = -1;
 	p->dir_y = 0;
 	p->plane_x = 0;
@@ -45,11 +45,28 @@ static int	init_player(t_game *g, t_player *p)
 	return (0);
 }
 
+static int	init_map(t_game *g, t_map *m)
+{
+	(void)g;
+	m->floor[0] = 0x0;
+	m->floor[1] = 0x5c;
+	m->floor[2] = 0x0;
+	m->floor[3] = 0x0;
+	m->ceiling[0] = 0x0;
+	m->ceiling[1] = 0xb0;
+	m->ceiling[2] = 0xfa;
+	m->ceiling[3] = 0xff;
+	return (0);
+}
+
 int	init_game(t_game *g)
 {
 	int	err;
 
 	err = init_window(g, &g->w);
+	if (err)
+		return (1);
+	err = init_map(g, &g->m);
 	if (err)
 		return (1);
 	err = init_player(g, &g->p);

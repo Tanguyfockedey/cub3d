@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/10/23 20:09:19 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/05 19:04:49 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # include <stdio.h>
 
 /* Screen resolution */
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1000
+# define HEIGHT 500
 
 /* Key bindings */
 # define ESC 53
@@ -41,8 +41,8 @@
 
 typedef struct s_map
 {
-	int			floor[3];
-	int			ceiling[3];
+	char			floor[4];
+	char			ceiling[4];
 	int			width;
 	int			height;
 	char		*tiles;
