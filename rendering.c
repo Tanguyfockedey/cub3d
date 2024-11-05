@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:36:40 by tafocked          #+#    #+#             */
-/*   Updated: 2024/10/23 18:32:11 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/05 19:32:15 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void	draw_wall(t_game *g, int col)
 	while (i < g->w.height)
 	{
 		if (i < draw_start)
-			color_pixel(g->w, col, i, 0x00FFFFFF);
+			color_pixel(g->w, col, i, 0x00b0faff);
 		else if (i > draw_end)
-			color_pixel(g->w, col, i, 0x00000000);
+			color_pixel(g->w, col, i, 0x005c0000);
 		else if (g->r.side == 0)
-			color_pixel(g->w, col, i, 0x0000FF00);
+			color_pixel(g->w, col, i, 0x000000AA);
 		else
 			color_pixel(g->w, col, i, 0x000000FF);
 		i++;
