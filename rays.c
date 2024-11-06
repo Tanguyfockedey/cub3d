@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:37:17 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/05 19:48:54 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:31:11 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	dda(t_game *g)
 	}
 }
 
-static void	wall_height(t_game *g)
+static void	wall_dist(t_game *g)
 {
 	t_ray	*r;
 
@@ -90,7 +90,7 @@ static void	wall_height(t_game *g)
 		r->perp_wall_dist = r->side_dist_y - r->delta_dist_y;
 }
 
-void	cast_rays(t_game *g)
+int	cast_rays(t_game *g)
 {
 	int		ray;
 
@@ -105,9 +105,9 @@ void	cast_rays(t_game *g)
 		delta_dist(g);
 		start_dist(g);
 		dda(g);
-		wall_height(g);
+		wall_dist(g);
 		draw_wall(g, ray);
 		ray++;
 	}
-	render(g);
+	return 0;
 }

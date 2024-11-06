@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/05 19:04:49 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:38:40 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,19 @@
 
 /* Key bindings */
 # define ESC 53
-# define LEFT 123
-# define RIGHT 124
-# define DOWN 125
-# define UP 126
-# define R_LEFT 
-# define R_RIGHT
+# define R_LEFT 123
+# define R_RIGHT 124
+# define LEFT 0
+# define RIGHT 2
+# define BACK 1
+# define FORWARD 13
+# define KEY_DOWN 2
+# define KEY_UP 3
 
 typedef struct s_map
 {
-	char			floor[4];
-	char			ceiling[4];
+	char		floor[4];
+	char		ceiling[4];
 	int			width;
 	int			height;
 	char		*tiles;
@@ -88,7 +90,9 @@ typedef struct s_player
 	double		plane_x;
 	double		plane_y;
 	double		camera_x;
-	// t_ray		*rays;
+	int			mov_forward;
+	int			mov_lr;
+	int			rot_lr;
 }	t_player;
 
 typedef struct s_game
@@ -105,10 +109,14 @@ int		arg_checker(int argc, char **argv, t_map *map);
 /* Game */
 int		init_game(t_game *game);
 int		close_hook(void);
-int		key_hook(int hook, t_game *g);
-void	cast_rays(t_game *g);
+int		key_down_handler(int hook, t_game *g);
+int		key_up_handler(int hook, t_game *g);
+void	position(t_game *g);
+int		cast_rays(t_game *g);
 void	draw_wall(t_game *g, int col);
-void	render(t_game *g);
+int		render(t_game *g);
+
+
 
 /* Utils */
 int		err_val(int ret);

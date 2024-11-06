@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:45:15 by tafocked          #+#    #+#             */
-/*   Updated: 2024/10/23 17:24:27 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:38:55 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,5 @@ static int	init_map(t_map *map)
 	map->tiles[33] = '1';
 	map->tiles[34] = '1';
 	map->tiles[43] = '1';
-	map->tiles[55] = '1';
-	map->tiles[66] = '1';
-	map->tiles[77] = '1';
 	return (0);
 }
