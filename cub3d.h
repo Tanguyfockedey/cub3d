@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/06 18:38:40 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:54:59 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	position(t_game *g);
 int		cast_rays(t_game *g);
 void	draw_wall(t_game *g, int col);
 int		render(t_game *g);
-
+void	rotate(t_player *p);
 
 
 /* Utils */

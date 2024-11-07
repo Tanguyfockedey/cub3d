@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:59:39 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/06 17:32:41 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:01:42 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static int	init_window(t_game *g, t_window *w)
 
 static int	init_player(t_game *g, t_player *p)
 {
-	p->pos_x = 7;
-	p->pos_y = 3;
-	p->dir_x = -1;
-	p->dir_y = 0;
-	p->plane_x = 0;
-	p->plane_y = 0.66;
+	p->pos_x = 3.5;
+	p->pos_y = 5.5;
+	p->dir_x = 0;
+	p->dir_y = -1;
+	p->plane_x = 0.66;
+	p->plane_y = 0;
 	(void)g;
 	return (0);
 }
