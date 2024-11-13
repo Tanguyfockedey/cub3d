@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/07 14:54:59 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:50:28 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /* Includes */
 # include "includes/libft_updated/libft.h"
 # include "includes/libft_updated/printf/ft_printf.h"
-# include <mlx.h>
+# include "includes/mlx_linux/mlx.h"
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>

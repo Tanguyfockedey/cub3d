@@ -6,7 +6,7 @@
 #    By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 16:37:10 by tafocked          #+#    #+#              #
-#    Updated: 2024/10/22 13:07:38 by tafocked         ###   ########.fr        #
+#    Updated: 2024/11/13 15:51:11 by tafocked         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,10 @@ NAME	= cub3d
 FILES	= $(wildcard *.c) \
 
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -g #-fsanitize=thread
+CFLAGS	= -Wall -Wextra -Werror  -g #-fsanitize=thread
 LDLIBS	= includes/libft_updated/libft.a \
-			-lmlx -framework OpenGL -framework AppKit
+			-Lincludes/mlx_linux -lmlx -Iincludes/mlx_linux -lXext -lX11 -lm
+# -lmlx -framework OpenGL -framework AppKit
 
 FILES_DIR = ./
 OBJ_DIR	= .obj
@@ -33,15 +34,18 @@ $(OBJ_DIR)/%.o: $(FILES_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(LDLIBS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) -o $(NAME)
 
 libs:
 	$(MAKE) -C includes/libft_updated
+	$(MAKE) -C includes/mlx_linux
 
 clean:
 	rm -rf $(OBJ_DIR)
 #	rm -f $(OBJ)
 	$(MAKE) -C includes/libft_updated clean
+	$(MAKE) -C includes/mlx_linux clean
+
 
 fclean: clean
 	rm -f $(NAME)
