@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:37:17 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/06 18:31:11 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:10:46 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	start_dist(t_game *g)
 	else
 	{
 		r->step_x = 1;
-		r->side_dist_x = (-(g->p.pos_x) + r->map_x) * r->delta_dist_x;
+		r->side_dist_x = (-(g->p.pos_x) + r->map_x + 1) * r->delta_dist_x;
 	}
 	if (r->dir_y < 0)
 	{
@@ -50,7 +50,7 @@ static void	start_dist(t_game *g)
 	else
 	{
 		r->step_y = 1;
-		r->side_dist_y = (-(g->p.pos_y) + r->map_y) * r->delta_dist_y;
+		r->side_dist_y = (-(g->p.pos_y) + r->map_y + 1) * r->delta_dist_y;
 	}
 }
 
