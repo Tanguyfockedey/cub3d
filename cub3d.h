@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/13 18:54:01 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/13 21:45:27 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <string.h>
 # include <errno.h>
 # include <stdio.h>
+# include <sys/time.h>
 
 /* Screen resolution */
 # define WIDTH 1000
@@ -48,6 +49,11 @@
 #  define KEY_DOWN 2
 #  define KEY_UP 3
 # endif
+# define NORTH 0;
+# define EAST 18;
+# define SOUTH 36;
+# define WEST 54;
+
 
 typedef struct s_map
 {
@@ -56,6 +62,7 @@ typedef struct s_map
 	int			width;
 	int			height;
 	char		*tiles;
+	char		player_dir;
 	//N E S W walls
 }	t_map;
 
@@ -70,8 +77,7 @@ typedef struct s_window
 	int			bpp;
 	int			size_line;
 	int			endian;
-	double		time;
-	double		old_time;
+	int			time;
 }	t_window;
 
 typedef struct s_ray
@@ -132,5 +138,8 @@ void	rotate(t_player *p);
 int		err_val(int ret);
 int		err_str(char *str, int ret);
 void	print_map(t_map *map);
+int		timestamp(void);
+void	msleep(int ms);
+void	sleeptill(int t);
 
 #endif
