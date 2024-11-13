@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/13 15:50:28 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/13 18:54:01 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 /* Includes */
 # include "includes/libft_updated/libft.h"
 # include "includes/libft_updated/printf/ft_printf.h"
-# include "includes/mlx_linux/mlx.h"
+# ifdef __linux__
+#  include "includes/mlx_linux/mlx.h"
+# elif __APPLE__
+#  include <mlx.h>
+# endif
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -31,15 +35,19 @@
 # define HEIGHT 500
 
 /* Key bindings */
-# define ESC 53
-# define R_LEFT 123
-# define R_RIGHT 124
-# define LEFT 0
-# define RIGHT 2
-# define BACK 1
-# define FORWARD 13
-# define KEY_DOWN 2
-# define KEY_UP 3
+# ifdef __linux__
+
+# elif __APPLE__
+#  define ESC 53
+#  define R_LEFT 123
+#  define R_RIGHT 124
+#  define LEFT 0
+#  define RIGHT 2
+#  define BACK 1
+#  define FORWARD 13
+#  define KEY_DOWN 2
+#  define KEY_UP 3
+# endif
 
 typedef struct s_map
 {
@@ -62,6 +70,8 @@ typedef struct s_window
 	int			bpp;
 	int			size_line;
 	int			endian;
+	double		time;
+	double		old_time;
 }	t_window;
 
 typedef struct s_ray
