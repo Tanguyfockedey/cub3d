@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:37:17 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/13 19:10:46 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:50:30 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	dda(t_game *g)
 			r->map_y += r->step_y;
 			r->side = 1;
 		}
-		if (g->m.tiles[g->m.width * r->map_y + r->map_x] > '0')
+		if (g->m.tiles[g->m.width * r->map_y + r->map_x] > '0') //potential change
 			r->hit = 1;
 	}
 }
@@ -85,9 +85,20 @@ static void	wall_dist(t_game *g)
 
 	r = &g->r;
 	if (r->side == 0)
+	{
 		r->perp_wall_dist = r->side_dist_x - r->delta_dist_x;
+		r->wall_x = g->p.pos_y + r->perp_wall_dist * r->dir_y;
+	}
 	else
+	{
 		r->perp_wall_dist = r->side_dist_y - r->delta_dist_y;
+		r->wall_x = g->p.pos_x + r->perp_wall_dist * r->dir_x;
+	}
+	r->tex_x = (int)(g->r.wall_x * TEX_WIDTH);
+	if (g->r.side == 0 && g->r.dir_x > 0)
+		r->tex_x = TEX_WIDTH - r->tex_x - 1;
+	if (g->r.side == 1 && g->r.dir_y < 0)
+		r->tex_x = TEX_WIDTH - r->tex_x - 1;
 }
 
 int	cast_rays(t_game *g)

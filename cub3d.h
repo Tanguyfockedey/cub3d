@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/13 21:45:27 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:18:58 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,15 @@
 # define WIDTH 1000
 # define HEIGHT 500
 
+/* Texture resolution */
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
+
 /* Key bindings */
 # ifdef __linux__
 
 # elif __APPLE__
+#  define EXIT 17
 #  define ESC 53
 #  define R_LEFT 123
 #  define R_RIGHT 124
@@ -49,7 +54,7 @@
 #  define KEY_DOWN 2
 #  define KEY_UP 3
 # endif
-# define NORTH 0;
+# define NORTH 0; // remplacer fct rotate avec radians ?
 # define EAST 18;
 # define SOUTH 36;
 # define WEST 54;
@@ -57,12 +62,16 @@
 
 typedef struct s_map
 {
-	char		floor[4];
-	char		ceiling[4];
+	int			ceiling;
+	int			floor;
 	int			width;
 	int			height;
 	char		*tiles;
 	char		player_dir;
+	void		*tex_n;
+	void		*tex_e;
+	void		*tex_s;
+	void		*tex_w;
 	//N E S W walls
 }	t_map;
 
@@ -89,6 +98,8 @@ typedef struct s_ray
 	double		delta_dist_x;
 	double		delta_dist_y;
 	double		perp_wall_dist;
+	double		wall_x;
+	int			tex_x;
 	int			map_x;
 	int			map_y;
 	int			step_x;
@@ -132,14 +143,14 @@ int		cast_rays(t_game *g);
 void	draw_wall(t_game *g, int col);
 int		render(t_game *g);
 void	rotate(t_player *p);
-
+int		init_texture(t_game *g);
 
 /* Utils */
 int		err_val(int ret);
 int		err_str(char *str, int ret);
 void	print_map(t_map *map);
 int		timestamp(void);
-void	msleep(int ms);
+// void	msleep(int ms);
 void	sleeptill(int t);
 
 #endif

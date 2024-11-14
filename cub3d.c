@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:18:41 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/13 19:38:19 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:56:57 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int argc, char **argv)
 	err = init_game(&game);
 	if (err)
 		return (err);
-	//cast_rays(&game);
 	mlx_loop_hook(game.w.mlx, render, &game);
 	mlx_loop(game.w.mlx);
 }
