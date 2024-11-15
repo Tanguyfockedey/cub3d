@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:14:35 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/13 21:19:18 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:52:45 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	move(t_game *g)
 	int			next_x;
 	int			next_y;
 	p = &g->p;
-	next_x = p->pos_x + (p->dir_x * p->mov_forward * 0.2) - (p->dir_y * p->mov_lr * 0.1);
+	next_x = p->pos_x + (p->dir_x * p->mov_forward * 0.2) - (p->dir_y * p->mov_lr * 0.1); //traverse les murs dans les coins
 	next_y = p->pos_y + (p->dir_y * p->mov_forward * 0.2) + (p->dir_x * p->mov_lr * 0.1);
 	
 	if (g->m.tiles[g->m.width * next_y + next_x] == ' ') //potentiellement remplacer par '0'

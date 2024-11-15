@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:37:17 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/14 17:50:30 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:44:31 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,21 @@ static void	dda(t_game *g)
 static void	wall_dist(t_game *g)
 {
 	t_ray	*r;
+	double	wall_x;
 
 	r = &g->r;
 	if (r->side == 0)
 	{
 		r->perp_wall_dist = r->side_dist_x - r->delta_dist_x;
-		r->wall_x = g->p.pos_y + r->perp_wall_dist * r->dir_y;
+		wall_x = g->p.pos_y + r->perp_wall_dist * r->dir_y;
 	}
 	else
 	{
 		r->perp_wall_dist = r->side_dist_y - r->delta_dist_y;
-		r->wall_x = g->p.pos_x + r->perp_wall_dist * r->dir_x;
+		wall_x = g->p.pos_x + r->perp_wall_dist * r->dir_x;
 	}
-	r->tex_x = (int)(g->r.wall_x * TEX_WIDTH);
+	wall_x = wall_x - (int)wall_x;
+	r->tex_x = (int)(wall_x * TEX_WIDTH);
 	if (g->r.side == 0 && g->r.dir_x > 0)
 		r->tex_x = TEX_WIDTH - r->tex_x - 1;
 	if (g->r.side == 1 && g->r.dir_y < 0)
