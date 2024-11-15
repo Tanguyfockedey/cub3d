@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:14:35 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/15 18:52:45 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/15 19:55:20 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,31 @@ void	rotate(t_player *p)
 	double		rot;
 
 	rot = 0.0875 * p->rot_lr;
-	old_dir_x = p->dir_x;
-	old_plane_x = p->plane_x;
+	old_dir_x = p->dir.x;
+	old_plane_x = p->plane.x;
 
-	p->dir_x = old_dir_x * cos(rot) - p->dir_y * sin(rot);
-	p->dir_y = old_dir_x * sin(rot) + p->dir_y * cos (rot);
-	p->plane_x = old_plane_x * cos(rot) - p->plane_y * sin(rot);
-	p->plane_y = old_plane_x * sin(rot) + p->plane_y * cos(rot);
+	p->dir.x = old_dir_x * cos(rot) - p->dir.y * sin(rot);
+	p->dir.y = old_dir_x * sin(rot) + p->dir.y * cos (rot);
+	p->plane.x = old_plane_x * cos(rot) - p->plane.y * sin(rot);
+	p->plane.y = old_plane_x * sin(rot) + p->plane.y * cos(rot);
 }
 
 void	move(t_game *g)
 {
 	t_player	*p;
-	int			next_x;
-	int			next_y;
+	t_coord		next;
+	//int			next_x;
+	//int			next_y;
 	p = &g->p;
-	next_x = p->pos_x + (p->dir_x * p->mov_forward * 0.2) - (p->dir_y * p->mov_lr * 0.1); //traverse les murs dans les coins
-	next_y = p->pos_y + (p->dir_y * p->mov_forward * 0.2) + (p->dir_x * p->mov_lr * 0.1);
+	next.x = p->pos.x + (p->dir.x * p->mov_forward * 0.2) - (p->dir.y * p->mov_lr * 0.1); //traverse les murs dans les coins
+	next.y = p->pos.y + (p->dir.y * p->mov_forward * 0.2) + (p->dir.x * p->mov_lr * 0.1);
 	
-	if (g->m.tiles[g->m.width * next_y + next_x] == ' ') //potentiellement remplacer par '0'
+	if (g->m.tiles[g->m.width * next.y + next.x] == ' ') //potentiellement remplacer par '0'
 	{
-		p->pos_x += p->dir_x * p->mov_forward * 0.05;
-		p->pos_y += p->dir_y * p->mov_forward * 0.05;
-		p->pos_x -= p->dir_y * p->mov_lr * 0.05;
-		p->pos_y += p->dir_x * p->mov_lr * 0.05;
+		p->pos.x += p->dir.x * p->mov_forward * 0.05;
+		p->pos.y += p->dir.y * p->mov_forward * 0.05;
+		p->pos.x -= p->dir.y * p->mov_lr * 0.05;
+		p->pos.y += p->dir.x * p->mov_lr * 0.05;
 	}
 	
 }
