@@ -6,33 +6,39 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:36:40 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/15 19:19:31 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/15 20:46:44 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	color_pixel(t_window w, int x_pix, int y_pix, int color)
+static void	color_pixel(t_window *w, int x_pix, int y_pix, int color)
 {
 	char	*addr;
 
-	addr = w.addr + (y_pix * w.size_line + x_pix * w.bpp / 8);
+	addr = w->buff.addr + (y_pix * w->buff.size_line + x_pix * w->buff.bpp / 8);
 	*(unsigned int *)addr = color;
 }
 
 void	texture_wall(t_game *g, int col, int i, double step, double *tex_pos)
 {
-	int	tex_y;
 	unsigned int	color;
 
-	tex_y = (int)*tex_pos & (TEX_HEIGHT - 1);
+	g->r.tex.y = (int)*tex_pos & (TEX_HEIGHT - 1);
 	*tex_pos += step;
-	color = get_img_color(&g->m.tex_n, g->r.tex_x, tex_y);
-	color_pixel(g->w, col, i, color);
-	// if (g->r.side == 0)
-	// 	color_pixel(g->w, col, i, 0x000000AA);
-	// else
-	// 	color_pixel(g->w, col, i, 0x000000FF);
+	if (g->r.side == 1)
+		if (g->r.dir.y < 0)
+			color = get_img_color(&g->m.tex_n, &g->r.tex);
+		else
+			color = get_img_color(&g->m.tex_s, &g->r.tex);
+	else
+		if (g->r.dir.x < 0)
+			color = get_img_color(&g->m.tex_w, &g->r.tex);
+		else
+			color = get_img_color(&g->m.tex_e, &g->r.tex);
+	if (g->r.side == 0)
+		color = (color >> 1) & 0x007F7F7F;
+	color_pixel(&g->w, col, i, color);
 }
 
 void	draw_wall(t_game *g, int col)
@@ -58,9 +64,9 @@ void	draw_wall(t_game *g, int col)
 	while (i < g->w.height)
 	{
 		if (i < draw_start)
-			color_pixel(g->w, col, i, g->m.ceiling); //ceiling
+			color_pixel(&g->w, col, i, g->m.ceiling); //ceiling
 		else if (i > draw_end)
-			color_pixel(g->w, col, i, g->m.floor); //floor
+			color_pixel(&g->w, col, i, g->m.floor); //floor
 		else
 			texture_wall(g, col, i, step, &tex_pos);
 		i++;
@@ -73,7 +79,7 @@ int	render(t_game *g)
 
 	position (g);
 	cast_rays(g);
-	mlx_put_image_to_window(g->w.mlx, g->w.win, g->w.img, 0, 0);
+	mlx_put_image_to_window(g->w.mlx, g->w.win, g->w.buff.img, 0, 0);
 	oldtime = g->w.time;
 	sleeptill(g->w.time + 17);
 	g->w.time = timestamp();

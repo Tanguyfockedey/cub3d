@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:59:39 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/14 17:50:04 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/15 19:52:09 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static int	init_window(t_game *g, t_window *w)
 	w->win = mlx_new_window(w->mlx, w->width, w->height, "Cub3d");
 	if (!w->win)
 		return (err_str("Initilisation of window failed.", 1));
-	w->img = mlx_new_image(w->mlx, w->width, w->height);
-	if (!w->img)
+	w->buff.img = mlx_new_image(w->mlx, w->width, w->height);
+	if (!w->buff.img)
 		return (err_str("Initialisation of image failed.", 1));
-	w->addr = mlx_get_data_addr(w->img, &w->bpp, &w->size_line, &w->endian);
-	if (!w->addr)
+	w->buff.addr = mlx_get_data_addr(w->buff.img, &w->buff.bpp, &w->buff.size_line, &w->buff.endian);
+	if (!w->buff.addr)
 		return (err_str("No image adress.", 1));
 	mlx_hook(w->win, EXIT, 0, close_hook, g);
 	mlx_hook(w->win, KEY_DOWN, 0, key_down_handler, g);
@@ -39,15 +39,15 @@ static int	init_player(t_game *g, t_player *p)
 {
 	int	i;
 
-	i = 0;
-	p->pos_x = 3.5;
-	p->pos_y = 5.5;
-	p->dir_x = 0;
-	p->dir_y = -1;
-	p->plane_x = 0.66;
-	p->plane_y = 0;
+	p->pos.x = 3.5;
+	p->pos.y = 5.5;
+	p->dir.x = 0;
+	p->dir.y = -1;
+	p->plane.x = 0.66;
+	p->plane.y = 0;
 	p->mov_forward = 0;
 	p->mov_lr = 0;
+	i = 0;
 	while (i++ < g->m.player_dir) // meilleur solution ?
 	{
 		p->rot_lr = -1;

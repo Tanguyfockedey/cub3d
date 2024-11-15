@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:59:45 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/15 19:01:25 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/15 20:47:44 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	init_texture(t_game *g)
 	tex_w = TEX_WIDTH;
 	g->m.tex_n.img = mlx_xpm_file_to_image(g->w.mlx, "textures/bricks.xpm", &tex_w, &tex_h);
 	g->m.tex_e.img = mlx_xpm_file_to_image(g->w.mlx, "textures/bricks.xpm", &tex_w, &tex_h);
-	g->m.tex_s.img = mlx_xpm_file_to_image(g->w.mlx, "textures/bricks.xpm", &tex_w, &tex_h);
-	g->m.tex_w.img = mlx_xpm_file_to_image(g->w.mlx, "textures/bricks.xpm", &tex_w, &tex_h);
+	g->m.tex_s.img = mlx_xpm_file_to_image(g->w.mlx, "textures/rocks.xpm", &tex_w, &tex_h);
+	g->m.tex_w.img = mlx_xpm_file_to_image(g->w.mlx, "textures/rocks.xpm", &tex_w, &tex_h);
 
 	g->m.tex_n.addr = mlx_get_data_addr(g->m.tex_n.img, &g->m.tex_n.bpp, &g->m.tex_n.size_line, &g->m.tex_n.endian);
 	g->m.tex_e.addr = mlx_get_data_addr(g->m.tex_e.img, &g->m.tex_e.bpp, &g->m.tex_e.size_line, &g->m.tex_e.endian);
@@ -31,12 +31,12 @@ int	init_texture(t_game *g)
 	return (0);
 }
 
-unsigned int	get_img_color(t_image *img, int x, int y)
+unsigned int	get_img_color(t_image *img, t_coord *p)
 {
 	unsigned int	color;
 	char			*addr;
 
-	addr = img->addr + (y * img->size_line + x * (img->bpp / 8));
+	addr = img->addr + (p->y * img->size_line + p->x * (img->bpp / 8));
 	color = *(unsigned int *)addr;
 	return (color);
 }

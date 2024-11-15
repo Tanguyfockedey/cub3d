@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/15 19:30:18 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/15 20:33:28 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,34 +101,18 @@ typedef struct s_window
 	int			height;
 	void		*mlx;
 	void		*win;
-	void		*img;
-	void		*addr;
-	int			bpp;
-	int			size_line;
-	int			endian;
+	t_image		buff;
 	int			time;
 }	t_window;
 
 typedef struct s_ray
 {
-	double		dir_x;
-	double		dir_y;
 	t_vector	dir;
-	double		side_dist_x;
-	double		side_dist_y;
 	t_vector	side_dist;
-	double		delta_dist_x;
-	double		delta_dist_y;
 	t_vector	delta_dist;
 	double		perp_wall_dist;
-	int			tex_x;
-	int			tex_y;
-	t_vector	tex;
-	int			map_x;
-	int			map_y;
+	t_coord		tex;
 	t_coord		map;
-	int			step_x;
-	int			step_y;
 	t_coord		step;
 	int			hit;
 	int			side;
@@ -136,14 +120,8 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	double		pos_x;
-	double		pos_y;
 	t_vector	pos;
-	double		dir_x;
-	double		dir_y;
 	t_vector	dir;
-	double		plane_x;
-	double		plane_y;
 	t_vector	plane;
 	double		camera_x;
 	int			mov_forward;
@@ -173,7 +151,7 @@ void	draw_wall(t_game *g, int col);
 int		render(t_game *g);
 void	rotate(t_player *p);
 int		init_texture(t_game *g);
-unsigned int	get_img_color(t_image *img, int x, int y);
+unsigned int	get_img_color(t_image *img, t_coord *p);
 
 
 /* Utils */
