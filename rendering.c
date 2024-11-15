@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:36:40 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/15 19:48:22 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/15 20:46:44 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,19 @@ void	texture_wall(t_game *g, int col, int i, double step, double *tex_pos)
 
 	g->r.tex.y = (int)*tex_pos & (TEX_HEIGHT - 1);
 	*tex_pos += step;
-	color = get_img_color(&g->m.tex_n, &g->r.tex);
+	if (g->r.side == 1)
+		if (g->r.dir.y < 0)
+			color = get_img_color(&g->m.tex_n, &g->r.tex);
+		else
+			color = get_img_color(&g->m.tex_s, &g->r.tex);
+	else
+		if (g->r.dir.x < 0)
+			color = get_img_color(&g->m.tex_w, &g->r.tex);
+		else
+			color = get_img_color(&g->m.tex_e, &g->r.tex);
+	if (g->r.side == 0)
+		color = (color >> 1) & 0x007F7F7F;
 	color_pixel(&g->w, col, i, color);
-	// if (g->r.side == 0)
-	// 	color_pixel(g->w, col, i, 0x000000AA);
-	// else
-	// 	color_pixel(g->w, col, i, 0x000000FF);
 }
 
 void	draw_wall(t_game *g, int col)
