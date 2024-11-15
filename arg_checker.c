@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:45:15 by tafocked          #+#    #+#             */
-/*   Updated: 2024/10/23 17:24:27 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:51:49 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,23 @@ static int	init_map(t_map *map)
 	int	i;
 	
 	i = 0;
-	map->width = 10;
-	map->height = 10;
+	map->width = 16;
+	map->height = 16;
 	map->tiles = malloc(map->width * map->height * sizeof(char));
-	while (i < 100)
+	while (i < 256)
 	{
-		if (i < 10 || (i % 10 == 0) || (i % 10 == 9) || i > 90)
+		if (i < 16 || (i % 16 == 0) || (i % 16 == 15) || i > 240)
 			map->tiles[i] = '1';
 		else
 			map->tiles[i] = ' ';
 		i++;
 	}
-	map->tiles[32] = '1';
-	map->tiles[33] = '1';
 	map->tiles[34] = '1';
+	map->tiles[35] = '1';
+	map->tiles[36] = '1';
+	map->tiles[51] = '1';
 	map->tiles[43] = '1';
-	map->tiles[55] = '1';
-	map->tiles[66] = '1';
-	map->tiles[77] = '1';
+	map->tiles[58] = '1';
+	map->tiles[73] = '1';
 	return (0);
 }

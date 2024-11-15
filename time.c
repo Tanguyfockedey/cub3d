@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 17:59:35 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/14 14:41:20 by tafocked         ###   ########.fr       */
+/*   Created: 2024/11/14 14:40:16 by tafocked          #+#    #+#             */
+/*   Updated: 2024/11/14 14:48:53 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	print_map(t_map *map)
+int	timestamp(void)
 {
-	int	i;
-	int	j;
+	struct timeval	t;
 
-	i = 0;
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-		{
-			printf("%c ", map->tiles[i * map->width + j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
+	gettimeofday(&t, NULL);
+	return (t.tv_sec * 1000 + t.tv_usec / 1000);
+}
+
+// void	msleep(int ms)
+// {
+// 	int	t;
+
+// 	t = timestamp() + ms;
+// 	while (timestamp() < t)
+// 		usleep(100);
+// }
+
+void	sleeptill(int t)
+{
+	while (timestamp() < t)
+		usleep(100);
 }

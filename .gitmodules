@@ -1,3 +1,6 @@
 [submodule "includes/libft_updated"]
 	path = includes/libft_updated
 	url = git@github.com:Tanguyfockedey/libft_updated.git
+[submodule "includes/mlx_linux"]
+	path = includes/mlx_linux
+	url = git@github.com:42Paris/minilibx-linux.git

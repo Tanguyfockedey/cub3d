@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:37:17 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/05 19:48:54 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:44:31 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	start_dist(t_game *g)
 	else
 	{
 		r->step_x = 1;
-		r->side_dist_x = (-(g->p.pos_x) + r->map_x) * r->delta_dist_x;
+		r->side_dist_x = (-(g->p.pos_x) + r->map_x + 1) * r->delta_dist_x;
 	}
 	if (r->dir_y < 0)
 	{
@@ -50,7 +50,7 @@ static void	start_dist(t_game *g)
 	else
 	{
 		r->step_y = 1;
-		r->side_dist_y = (-(g->p.pos_y) + r->map_y) * r->delta_dist_y;
+		r->side_dist_y = (-(g->p.pos_y) + r->map_y + 1) * r->delta_dist_y;
 	}
 }
 
@@ -74,23 +74,36 @@ static void	dda(t_game *g)
 			r->map_y += r->step_y;
 			r->side = 1;
 		}
-		if (g->m.tiles[g->m.width * r->map_y + r->map_x] > '0')
+		if (g->m.tiles[g->m.width * r->map_y + r->map_x] > '0') //potential change
 			r->hit = 1;
 	}
 }
 
-static void	wall_height(t_game *g)
+static void	wall_dist(t_game *g)
 {
 	t_ray	*r;
+	double	wall_x;
 
 	r = &g->r;
 	if (r->side == 0)
+	{
 		r->perp_wall_dist = r->side_dist_x - r->delta_dist_x;
+		wall_x = g->p.pos_y + r->perp_wall_dist * r->dir_y;
+	}
 	else
+	{
 		r->perp_wall_dist = r->side_dist_y - r->delta_dist_y;
+		wall_x = g->p.pos_x + r->perp_wall_dist * r->dir_x;
+	}
+	wall_x = wall_x - (int)wall_x;
+	r->tex_x = (int)(wall_x * TEX_WIDTH);
+	if (g->r.side == 0 && g->r.dir_x > 0)
+		r->tex_x = TEX_WIDTH - r->tex_x - 1;
+	if (g->r.side == 1 && g->r.dir_y < 0)
+		r->tex_x = TEX_WIDTH - r->tex_x - 1;
 }
 
-void	cast_rays(t_game *g)
+int	cast_rays(t_game *g)
 {
 	int		ray;
 
@@ -105,9 +118,9 @@ void	cast_rays(t_game *g)
 		delta_dist(g);
 		start_dist(g);
 		dda(g);
-		wall_height(g);
+		wall_dist(g);
 		draw_wall(g, ray);
 		ray++;
 	}
-	render(g);
+	return 0;
 }

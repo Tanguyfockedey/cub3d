@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/05 19:04:49 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/15 19:30:18 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 /* Includes */
 # include "includes/libft_updated/libft.h"
 # include "includes/libft_updated/printf/ft_printf.h"
-# include <mlx.h>
+# ifdef __linux__
+#  include "includes/mlx_linux/mlx.h"
+# elif __APPLE__
+#  include <mlx.h>
+# endif
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -25,27 +29,69 @@
 # include <string.h>
 # include <errno.h>
 # include <stdio.h>
+# include <sys/time.h>
 
 /* Screen resolution */
 # define WIDTH 1000
 # define HEIGHT 500
 
+/* Texture resolution */
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
+
 /* Key bindings */
-# define ESC 53
-# define LEFT 123
-# define RIGHT 124
-# define DOWN 125
-# define UP 126
-# define R_LEFT 
-# define R_RIGHT
+# ifdef __linux__
+
+# elif __APPLE__
+#  define EXIT 17
+#  define ESC 53
+#  define R_LEFT 123
+#  define R_RIGHT 124
+#  define LEFT 0
+#  define RIGHT 2
+#  define BACK 1
+#  define FORWARD 13
+#  define KEY_DOWN 2
+#  define KEY_UP 3
+# endif
+# define NORTH 0; // remplacer fct rotate avec radians ?
+# define EAST 18;
+# define SOUTH 36;
+# define WEST 54;
+
+typedef struct s_image
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}	t_image;
+
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}	t_vector;
+
+typedef struct s_coord
+{
+	int	x;
+	int	y;
+}	t_coord;
 
 typedef struct s_map
 {
-	char			floor[4];
-	char			ceiling[4];
+	int			ceiling;
+	int			floor;
 	int			width;
 	int			height;
 	char		*tiles;
+	char		player_dir;
+	t_image		tex_n;
+	t_image		tex_e;
+	t_image		tex_s;
+	t_image		tex_w;
 	//N E S W walls
 }	t_map;
 
@@ -60,21 +106,30 @@ typedef struct s_window
 	int			bpp;
 	int			size_line;
 	int			endian;
+	int			time;
 }	t_window;
 
 typedef struct s_ray
 {
 	double		dir_x;
 	double		dir_y;
+	t_vector	dir;
 	double		side_dist_x;
 	double		side_dist_y;
+	t_vector	side_dist;
 	double		delta_dist_x;
 	double		delta_dist_y;
+	t_vector	delta_dist;
 	double		perp_wall_dist;
+	int			tex_x;
+	int			tex_y;
+	t_vector	tex;
 	int			map_x;
 	int			map_y;
+	t_coord		map;
 	int			step_x;
 	int			step_y;
+	t_coord		step;
 	int			hit;
 	int			side;
 }	t_ray;
@@ -83,12 +138,17 @@ typedef struct s_player
 {
 	double		pos_x;
 	double		pos_y;
+	t_vector	pos;
 	double		dir_x;
 	double		dir_y;
+	t_vector	dir;
 	double		plane_x;
 	double		plane_y;
+	t_vector	plane;
 	double		camera_x;
-	// t_ray		*rays;
+	int			mov_forward;
+	int			mov_lr;
+	int			rot_lr;
 }	t_player;
 
 typedef struct s_game
@@ -105,14 +165,23 @@ int		arg_checker(int argc, char **argv, t_map *map);
 /* Game */
 int		init_game(t_game *game);
 int		close_hook(void);
-int		key_hook(int hook, t_game *g);
-void	cast_rays(t_game *g);
+int		key_down_handler(int hook, t_game *g);
+int		key_up_handler(int hook, t_game *g);
+void	position(t_game *g);
+int		cast_rays(t_game *g);
 void	draw_wall(t_game *g, int col);
-void	render(t_game *g);
+int		render(t_game *g);
+void	rotate(t_player *p);
+int		init_texture(t_game *g);
+unsigned int	get_img_color(t_image *img, int x, int y);
+
 
 /* Utils */
 int		err_val(int ret);
 int		err_str(char *str, int ret);
 void	print_map(t_map *map);
+int		timestamp(void);
+// void	msleep(int ms);
+void	sleeptill(int t);
 
 #endif
