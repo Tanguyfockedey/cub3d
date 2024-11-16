@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 17:14:11 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:38:55 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,15 +139,15 @@ typedef struct s_game
 }	t_game;
 
 /* Functions */
-int				arg_checker(int argc, char **argv, t_map *map);
+int				arg_checker(int argc, char **argv, t_map *map); //temp
 
 /* Color */
 void			color_pixel(t_image *img, t_coord *px, int color);
 unsigned int	get_img_color(t_image *img, t_coord *px);
 
 /* Error */
-int				err_val(int ret);
-int				err_str(char *str, int ret);
+int				err_val(int ret); //temp
+int				err_str(char *str, int ret); //temp
 
 /* Hooks */
 int				close_hook(void);
@@ -155,7 +155,7 @@ int				key_down_handler(int hook, t_game *g);
 int				key_up_handler(int hook, t_game *g);
 
 /* Init game */
-int				init_game(t_game *game);
+int				init_game(t_game *game); //mod
 
 /* Movememts */
 void			rotate(t_player *p, double rot);
@@ -169,13 +169,13 @@ void			draw_wall(t_game *g);
 int				render(t_game *g);
 
 /* Init texture */
-int				init_texture(t_game *g, t_map *m);
+int				init_texture(t_game *g, t_map *m); // mod
 
 /* Time */
 int				timestamp(void);
 void			sleeptill(int t);
 
 /* Utils */
-void			print_map(t_map *map);
+void			print_map(t_map *map); //temp
 
 #endif

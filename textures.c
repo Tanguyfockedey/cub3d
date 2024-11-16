@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:59:45 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 16:16:30 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:46:38 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	init_texture(t_game *g, t_map *m)
 	m->tex_n.img = mlx_xpm_file_to_image
 		(g->w.mlx, "textures/bricks.xpm", &tex_w, &tex_h);
 	m->tex_e.img = mlx_xpm_file_to_image
-		(g->w.mlx, "textures/bricks.xpm", &tex_w, &tex_h);
+		(g->w.mlx, "textures/glass.xpm", &tex_w, &tex_h);
 	m->tex_s.img = mlx_xpm_file_to_image
 		(g->w.mlx, "textures/rocks.xpm", &tex_w, &tex_h);
 	m->tex_w.img = mlx_xpm_file_to_image
-		(g->w.mlx, "textures/rocks.xpm", &tex_w, &tex_h);
+		(g->w.mlx, "textures/bookshelf.xpm", &tex_w, &tex_h);
 	m->tex_n.addr = mlx_get_data_addr
 		(m->tex_n.img, &m->tex_n.bpp, &m->tex_n.size_line, &m->tex_n.endian);
 	m->tex_e.addr = mlx_get_data_addr

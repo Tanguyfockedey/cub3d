@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:59:39 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 17:07:25 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:31:22 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static int	init_map(t_game *g, t_map *m)
 
 static int	init_player(t_game *g, t_player *p)
 {
-	p->pos.x = 3.5;
-	p->pos.y = 5.5;
+	p->pos.x = 5.5; // a changer
+	p->pos.y = 5.5; // a changer
 	p->dir.x = 0;
 	p->dir.y = -1;
 	p->plane.x = 0.66;

@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:18:41 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/15 16:46:46 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:38:26 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	int		err;
 	t_game	game;
 
-	err = arg_checker(argc, argv, &game.m);
+	err = arg_checker(argc, argv, &game.m); //tmp
 	if (err)
 		return (err);
 	err = init_game(&game);
