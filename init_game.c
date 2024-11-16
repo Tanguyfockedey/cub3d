@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:59:39 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 16:18:16 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:07:25 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ static int	init_window(t_game *g, t_window *w)
 	return (0);
 }
 
+static int	init_map(t_game *g, t_map *m)
+{
+	(void)g;
+	m->ceiling = 0x00b0faff;
+	m->floor = 0x005c0000;
+	m->player_dir = NORTH;
+	if (init_texture(g, &g->m))
+		exit(1);
+	return (0);
+}
+
 static int	init_player(t_game *g, t_player *p)
 {
 	p->pos.x = 3.5;
@@ -49,17 +60,6 @@ static int	init_player(t_game *g, t_player *p)
 	p->rot_lr = 1;
 	rotate(p, g->m.player_dir);
 	p->rot_lr = 0;
-	return (0);
-}
-
-static int	init_map(t_game *g, t_map *m)
-{
-	(void)g;
-	m->ceiling = 0x00b0faff;
-	m->floor = 0x005c0000;
-	m->player_dir = NORTH;
-	if (init_texture(g, &g->m))
-		exit(1);
 	return (0);
 }
 

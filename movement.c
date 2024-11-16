@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:14:35 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 16:46:30 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:10:51 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	rotate(t_player *p, double rot)
 	p->plane.y = old_plane_x * sin(rot) + p->plane.y * cos(rot);
 }
 
-static void	move(t_game *g)
+void	move(t_game *g)
 {
 	t_player	*p;
 	t_coord		next;
@@ -43,12 +43,4 @@ static void	move(t_game *g)
 		p->pos.x -= p->dir.y * p->mov_lr * 0.05;
 		p->pos.y += p->dir.x * p->mov_lr * 0.05;
 	}
-}
-
-void	position(t_game *g)
-{
-	if (g->p.mov_forward || g->p.mov_lr)
-		move(g);
-	if (g->p.rot_lr)
-		rotate(&g->p, 0.0873);
 }

@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:36:40 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 16:10:44 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:09:40 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ int	render(t_game *g)
 {
 	int	oldtime;
 
-	position(g);
+	if (g->p.mov_forward || g->p.mov_lr)
+		move(g);
+	if (g->p.rot_lr)
+		rotate(&g->p, 0.0873);
 	cast_rays(g);
 	mlx_put_image_to_window(g->w.mlx, g->w.win, g->w.buff.img, 0, 0);
 	oldtime = g->w.time;

@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 16:26:41 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:14:11 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@
 # define SOUTH 3.142
 # define WEST 4.71
 
+/* Structures */
 typedef struct s_image
 {
 	void	*img;
@@ -92,7 +93,6 @@ typedef struct s_map
 	t_image	tex_e;
 	t_image	tex_s;
 	t_image	tex_w;
-	//N E S W walls
 }	t_map;
 
 typedef struct s_window
@@ -138,28 +138,44 @@ typedef struct s_game
 	t_ray		r;
 }	t_game;
 
-/* Parser */
+/* Functions */
 int				arg_checker(int argc, char **argv, t_map *map);
 
-/* Game */
-int				init_game(t_game *game);
+/* Color */
+void			color_pixel(t_image *img, t_coord *px, int color);
+unsigned int	get_img_color(t_image *img, t_coord *px);
+
+/* Error */
+int				err_val(int ret);
+int				err_str(char *str, int ret);
+
+/* Hooks */
 int				close_hook(void);
 int				key_down_handler(int hook, t_game *g);
 int				key_up_handler(int hook, t_game *g);
-void			position(t_game *g);
+
+/* Init game */
+int				init_game(t_game *game);
+
+/* Movememts */
+void			rotate(t_player *p, double rot);
+void			move(t_game *g);
+
+/* Rays */
 int				cast_rays(t_game *g);
+
+/* Rendering */
 void			draw_wall(t_game *g);
 int				render(t_game *g);
-void			rotate(t_player *p, double rot);
-int				init_texture(t_game *g, t_map *m);
-unsigned int	get_img_color(t_image *img, t_coord *px);
-void			color_pixel(t_image *img, t_coord *px, int color);
 
-/* Utils */
-int				err_val(int ret);
-int				err_str(char *str, int ret);
-void			print_map(t_map *map);
+/* Init texture */
+int				init_texture(t_game *g, t_map *m);
+
+/* Time */
 int				timestamp(void);
 void			sleeptill(int t);
+
+/* Utils */
+void			print_map(t_map *map);
 
 #endif
