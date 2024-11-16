@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:44:36 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/07 15:02:42 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 15:41:04 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	close_hook(void)
 {
-	exit(0); //needs better free
+	exit(0);
 	return (0);
 }
 
 int	key_down_handler(int hook, t_game *g)
 {
 	if (hook == ESC)
-		exit(0); //needs better free
+		exit(0);
 	else if (hook == R_LEFT)
 		g->p.rot_lr = -1;
 	else if (hook == R_RIGHT)

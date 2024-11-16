@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:59:39 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/15 19:52:09 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:18:16 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static int	init_window(t_game *g, t_window *w)
 	w->buff.img = mlx_new_image(w->mlx, w->width, w->height);
 	if (!w->buff.img)
 		return (err_str("Initialisation of image failed.", 1));
-	w->buff.addr = mlx_get_data_addr(w->buff.img, &w->buff.bpp, &w->buff.size_line, &w->buff.endian);
+	w->buff.addr = mlx_get_data_addr
+		(w->buff.img, &w->buff.bpp, &w->buff.size_line, &w->buff.endian);
 	if (!w->buff.addr)
 		return (err_str("No image adress.", 1));
 	mlx_hook(w->win, EXIT, 0, close_hook, g);
@@ -37,8 +38,6 @@ static int	init_window(t_game *g, t_window *w)
 
 static int	init_player(t_game *g, t_player *p)
 {
-	int	i;
-
 	p->pos.x = 3.5;
 	p->pos.y = 5.5;
 	p->dir.x = 0;
@@ -47,13 +46,9 @@ static int	init_player(t_game *g, t_player *p)
 	p->plane.y = 0;
 	p->mov_forward = 0;
 	p->mov_lr = 0;
-	i = 0;
-	while (i++ < g->m.player_dir) // meilleur solution ?
-	{
-		p->rot_lr = -1;
-		rotate(p);
-		p->rot_lr = 0;
-	}
+	p->rot_lr = 1;
+	rotate(p, g->m.player_dir);
+	p->rot_lr = 0;
 	return (0);
 }
 
@@ -62,8 +57,8 @@ static int	init_map(t_game *g, t_map *m)
 	(void)g;
 	m->ceiling = 0x00b0faff;
 	m->floor = 0x005c0000;
-	m->player_dir = WEST;
-	if (init_texture(g))
+	m->player_dir = NORTH;
+	if (init_texture(g, &g->m))
 		exit(1);
 	return (0);
 }

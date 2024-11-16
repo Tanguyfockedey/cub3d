@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:45:15 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/07 15:51:49 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 15:37:49 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	map_parser(char *file, t_map *map)
 static int	init_map(t_map *map)
 {
 	int	i;
-	
+
 	i = 0;
 	map->width = 16;
 	map->height = 16;

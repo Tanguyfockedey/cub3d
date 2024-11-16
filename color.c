@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 14:40:16 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 15:19:36 by tafocked         ###   ########.fr       */
+/*   Created: 2024/11/16 15:01:31 by tafocked          #+#    #+#             */
+/*   Updated: 2024/11/16 16:17:33 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	timestamp(void)
+void	color_pixel(t_image *img, t_coord *px, int color)
 {
-	struct timeval	t;
+	char	*addr;
 
-	gettimeofday(&t, NULL);
-	return (t.tv_sec * 1000 + t.tv_usec / 1000);
+	addr = img->addr + (px->y * img->size_line + px->x * img->bpp / 8);
+	*(unsigned int *)addr = color;
 }
 
-void	sleeptill(int t)
+unsigned int	get_img_color(t_image *img, t_coord *px)
 {
-	while (timestamp() < t)
-		usleep(100);
+	unsigned int	color;
+	char			*addr;
+
+	addr = img->addr + (px->y * img->size_line + px->x * (img->bpp / 8));
+	color = *(unsigned int *)addr;
+	return (color);
 }
