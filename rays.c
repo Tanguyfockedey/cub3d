@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:37:17 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 15:59:07 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:47:03 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	dda(t_game *g)
 			r->map.y += r->step.y;
 			r->side = 1;
 		}
-		if (g->m.tiles[g->m.width * r->map.y + r->map.x] > '0') //potential change
+		if (g->m.tiles[r->map.x][r->map.y] > '0') //potential change
 			r->hit = 1;
 	}
 }

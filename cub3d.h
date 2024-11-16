@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 16:25:16 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:26:41 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct s_map
 	int		floor;
 	int		width;
 	int		height;
-	char	*tiles;
+	char	**tiles;
 	double	player_dir;
 	t_image	tex_n;
 	t_image	tex_e;
