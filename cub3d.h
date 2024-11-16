@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/15 20:33:28 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:26:41 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@
 #  define KEY_DOWN 2
 #  define KEY_UP 3
 # endif
-# define NORTH 0; // remplacer fct rotate avec radians ?
-# define EAST 18;
-# define SOUTH 36;
-# define WEST 54;
+# define NORTH 0
+# define EAST 1.57
+# define SOUTH 3.142
+# define WEST 4.71
 
 typedef struct s_image
 {
@@ -82,27 +82,28 @@ typedef struct s_coord
 
 typedef struct s_map
 {
-	int			ceiling;
-	int			floor;
-	int			width;
-	int			height;
-	char		*tiles;
-	char		player_dir;
-	t_image		tex_n;
-	t_image		tex_e;
-	t_image		tex_s;
-	t_image		tex_w;
+	int		ceiling;
+	int		floor;
+	int		width;
+	int		height;
+	char	**tiles;
+	double	player_dir;
+	t_image	tex_n;
+	t_image	tex_e;
+	t_image	tex_s;
+	t_image	tex_w;
 	//N E S W walls
 }	t_map;
 
 typedef struct s_window
 {
-	int			width;
-	int			height;
-	void		*mlx;
-	void		*win;
-	t_image		buff;
-	int			time;
+	int		width;
+	int		height;
+	void	*mlx;
+	void	*win;
+	t_image	buff;
+	t_coord	pixel;
+	int		time;
 }	t_window;
 
 typedef struct s_ray
@@ -138,28 +139,27 @@ typedef struct s_game
 }	t_game;
 
 /* Parser */
-int		arg_checker(int argc, char **argv, t_map *map);
+int				arg_checker(int argc, char **argv, t_map *map);
 
 /* Game */
-int		init_game(t_game *game);
-int		close_hook(void);
-int		key_down_handler(int hook, t_game *g);
-int		key_up_handler(int hook, t_game *g);
-void	position(t_game *g);
-int		cast_rays(t_game *g);
-void	draw_wall(t_game *g, int col);
-int		render(t_game *g);
-void	rotate(t_player *p);
-int		init_texture(t_game *g);
-unsigned int	get_img_color(t_image *img, t_coord *p);
-
+int				init_game(t_game *game);
+int				close_hook(void);
+int				key_down_handler(int hook, t_game *g);
+int				key_up_handler(int hook, t_game *g);
+void			position(t_game *g);
+int				cast_rays(t_game *g);
+void			draw_wall(t_game *g);
+int				render(t_game *g);
+void			rotate(t_player *p, double rot);
+int				init_texture(t_game *g, t_map *m);
+unsigned int	get_img_color(t_image *img, t_coord *px);
+void			color_pixel(t_image *img, t_coord *px, int color);
 
 /* Utils */
-int		err_val(int ret);
-int		err_str(char *str, int ret);
-void	print_map(t_map *map);
-int		timestamp(void);
-// void	msleep(int ms);
-void	sleeptill(int t);
+int				err_val(int ret);
+int				err_str(char *str, int ret);
+void			print_map(t_map *map);
+int				timestamp(void);
+void			sleeptill(int t);
 
 #endif

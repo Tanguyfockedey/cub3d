@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:37:17 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/15 19:59:25 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:47:03 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	dda(t_game *g)
 			r->map.y += r->step.y;
 			r->side = 1;
 		}
-		if (g->m.tiles[g->m.width * r->map.y + r->map.x] > '0') //potential change
+		if (g->m.tiles[r->map.x][r->map.y] > '0') //potential change
 			r->hit = 1;
 	}
 }
@@ -105,12 +105,10 @@ static void	wall_dist(t_game *g)
 
 int	cast_rays(t_game *g)
 {
-	int		ray;
-
-	ray = 0;
-	while (ray < g->w.width)
+	g->w.pixel.x = 0;
+	while (g->w.pixel.x < g->w.width)
 	{
-		g->p.camera_x = 2 * ray / (double)(g->w.width) - 1;
+		g->p.camera_x = 2 * g->w.pixel.x / (double)(g->w.width) - 1;
 		g->r.dir.x = g->p.dir.x + g->p.plane.x * g->p.camera_x;
 		g->r.dir.y = g->p.dir.y + g->p.plane.y * g->p.camera_x;
 		g->r.map.x = (int)(g->p.pos.x);
@@ -119,8 +117,8 @@ int	cast_rays(t_game *g)
 		start_dist(g);
 		dda(g);
 		wall_dist(g);
-		draw_wall(g, ray);
-		ray++;
+		draw_wall(g);
+		g->w.pixel.x++;
 	}
-	return 0;
+	return (0);
 }

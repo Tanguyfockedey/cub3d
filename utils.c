@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 17:59:35 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/14 14:41:20 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:45:15 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	print_map(t_map *map)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 
-	i = 0;
-	while (i < map->height)
+	y = 0;
+	while (y < map->height)
 	{
-		j = 0;
-		while (j < map->width)
+		x = 0;
+		while (x < map->width)
 		{
-			printf("%c ", map->tiles[i * map->width + j]);
-			j++;
+			printf("%c ", map->tiles[x][y]);
+			x++;
 		}
 		printf("\n");
-		i++;
+		y++;
 	}
 }

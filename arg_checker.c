@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:45:15 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/07 15:51:49 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:43:54 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,34 @@ static int	map_parser(char *file, t_map *map)
 
 static int	init_map(t_map *map)
 {
-	int	i;
-	
-	i = 0;
-	map->width = 16;
+	int	x,y;
+
+	map->width = 10;
 	map->height = 16;
-	map->tiles = malloc(map->width * map->height * sizeof(char));
-	while (i < 256)
+	if (!(map->tiles = malloc(map->width * sizeof(void*))))
+		exit(1);
+	for (x = 0; x < map->width; x++)
 	{
-		if (i < 16 || (i % 16 == 0) || (i % 16 == 15) || i > 240)
-			map->tiles[i] = '1';
-		else
-			map->tiles[i] = ' ';
-		i++;
+		if (!(map->tiles[x] = malloc(map->height * sizeof(void*))))
+			exit(1);
 	}
-	map->tiles[34] = '1';
-	map->tiles[35] = '1';
-	map->tiles[36] = '1';
-	map->tiles[51] = '1';
-	map->tiles[43] = '1';
-	map->tiles[58] = '1';
-	map->tiles[73] = '1';
+	for (x = 0; x < map->width; x++)
+		map->tiles[x][0] = '1';
+	for (y = 1; y < map->height - 1; y++)
+	{
+		map->tiles[0][y] = '1';
+		for (x = 1; x < map->width; x++)
+			map->tiles[x][y] = ' ';
+		map->tiles[9][y] = '1';
+	}
+	for (x = 0; x < map->width; x++)
+		map->tiles[x][15] = '1';
+	map->tiles[4][3] = '1';
+	map->tiles[5][3] = '1';
+	map->tiles[6][3] = '1';
+	map->tiles[5][4] = '1';
+	map->tiles[6][11] = '1';
+	map->tiles[7][12] = '1';
+	map->tiles[8][13] = '1';
 	return (0);
 }
