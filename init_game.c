@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:59:39 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/19 15:50:23 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:39:18 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,24 @@ static int	map(t_game *g)
 	check_required_elements(g);
 	stock_map(line, g);
 	size_map(g);
-	fill_map(g);
-	get_map_size_fill(g);
-	if (check_chars(g) == 1)
-		return (1);
-	if (is_map_surrounded_by_walls(g) == 1)
-		return (1);
+	
+
 	if (count_pos(g) == 1)
 		return (1);
+	fill_map(g);
+	get_map_size_fill(g);
+	if (is_map_surrounded_by_walls(g) == 1)
+		return (1);
+	is_map_empty(g->m.map);
+	if (check_chars(g) == 1)
+		return (1);
 	find_player(g);
-	return (0);	
-	// if (init_texture(g, &g->m))
-	// 	exit(1);
+	if (init_texture(g, &g->m))
+		exit(1);	
+	return (0);
 }
+	
+
 
 static int	init_player(t_game *g, t_player *p)
 {

@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:09:27 by firdawssema       #+#    #+#             */
-/*   Updated: 2024/11/19 15:30:50 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:18:06 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ int	ft_findspace(char *line)
 
 int	check_textures(t_game *g)
 {
-	printf("%s\n", g->m.textures.no_t);
-	printf("%s\n", g->m.textures.so_t);
-	printf("%s\n", g->m.textures.we_t);
-	printf("%s\n", g->m.textures.ea_t);
+	// printf("%s\n", g->m.textures.no_t);
+	// printf("%scoucou\n", g->m.textures.so_t);
+	// printf("%s\n", g->m.textures.we_t);
+	// printf("%s\n", g->m.textures.ea_t);
 	if (open_file(g->m.textures.no_t) == -1)
-		return (printf("Error\nCould not open NO texture file.\n"), 1);
+		return (ft_printf("Error\nCould not open NO texture file.\n"),exit(1), 1);
 	if (open_file(g->m.textures.so_t) == -1)
-		return (printf("Error\nCould not open SO texture file.\n"), 1);
+		return (printf("Error\nCould not open SO texture file.\n"),exit(1), 1);
 	if (open_file(g->m.textures.we_t) == -1)
-		return (printf("Error\nCould not open WE texture file.\n"), 1);
+		return (printf("Error\nCould not open WE texture file.\n"), exit(1), 1);
 	if (open_file(g->m.textures.ea_t) == -1)
-		return (printf("Error\nCould not open EA texture file.\n"), 1);
+		return (printf("Error\nCould not open EA texture file.\n"), exit(1), 1);
 	return (0);
 }
 
@@ -63,6 +63,7 @@ void	parse_texture(char *line, char *id, t_game *g)
 	path = line + ft_strlen(id);
 	while (*path == ' ')
 		path++;
+	trim_newline(path);
 	if (ft_strcmp(id, "NO") == 0)
 		g->m.textures.no_t = ft_strdup(path);
 	else if (ft_strcmp(id, "SO") == 0)
@@ -71,4 +72,5 @@ void	parse_texture(char *line, char *id, t_game *g)
 		g->m.textures.we_t = ft_strdup(path);
 	else if (ft_strcmp(id, "EA") == 0)
 		g->m.textures.ea_t = ft_strdup(path);
+	//check_textures(g);
 }

@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 14:26:48 by fimazouz          #+#    #+#             */
-/*   Updated: 2024/11/19 15:08:46 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:03:00 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	find_player(t_game *g)
 				g->p.pos.y = (double)x;
 				g->p.start_direction = g->m.map[y][x];
 				g->m.map[y][x] = '0';
-				printf("Start : %c", g->p.start_direction);
+				//printf("Start : %c", g->p.start_direction);
 				return ;
 			}
 			x++;

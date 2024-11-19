@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
+/*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:59:45 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 17:46:38 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:19:11 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@ int	init_texture(t_game *g, t_map *m)
 	tex_h = TEX_HEIGHT;
 	tex_w = TEX_WIDTH;
 	m->tex_n.img = mlx_xpm_file_to_image
-		(g->w.mlx, "textures/bricks.xpm", &tex_w, &tex_h);
+		(g->w.mlx, g->m.textures.no_t, &tex_w, &tex_h);
+	// if(!m->tex_n.img)
+	// 	return(ft_printf("problemmmmmmm"), 1);
 	m->tex_e.img = mlx_xpm_file_to_image
-		(g->w.mlx, "textures/glass.xpm", &tex_w, &tex_h);
+		(g->w.mlx, g->m.textures.so_t, &tex_w, &tex_h);
 	m->tex_s.img = mlx_xpm_file_to_image
-		(g->w.mlx, "textures/rocks.xpm", &tex_w, &tex_h);
+		(g->w.mlx, g->m.textures.we_t, &tex_w, &tex_h);
 	m->tex_w.img = mlx_xpm_file_to_image
-		(g->w.mlx, "textures/bookshelf.xpm", &tex_w, &tex_h);
+		(g->w.mlx, g->m.textures.ea_t, &tex_w, &tex_h);
 	m->tex_n.addr = mlx_get_data_addr
 		(m->tex_n.img, &m->tex_n.bpp, &m->tex_n.size_line, &m->tex_n.endian);
 	m->tex_e.addr = mlx_get_data_addr

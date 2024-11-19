@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:44:27 by firdawssema       #+#    #+#             */
-/*   Updated: 2024/11/19 15:29:53 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:35:31 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	size_map(t_game *g)
 		i++;
 	}
 	g->m.height = i;
+	printf("height : %d \n", g->m.height);
+	printf("width : %d ", g->m.width);
 }
 
 void	get_map_size_fill(t_game *game)

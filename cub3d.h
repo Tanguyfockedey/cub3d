@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/19 15:45:08 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:24:18 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@
 # elif __APPLE__
 #  include <mlx.h>
 # endif
-# include <fcntl.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <math.h>
-# include <limits.h>
-# include <string.h>
 # include <errno.h>
+# include <fcntl.h>
+# include <limits.h>
+# include <math.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
 # include <sys/time.h>
+# include <unistd.h>
 
 /* Screen resolution */
 # define WIDTH 2000
@@ -72,24 +72,24 @@
 /* Structures */
 typedef struct s_image
 {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		size_line;
-	int		endian;
-}	t_image;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			size_line;
+	int			endian;
+}				t_image;
 
 typedef struct s_vector
 {
-	double	x;
-	double	y;
-}	t_vector;
+	double		x;
+	double		y;
+}				t_vector;
 
 typedef struct s_coord
 {
-	int	x;
-	int	y;
-}	t_coord;
+	int			x;
+	int			y;
+}				t_coord;
 
 typedef struct s_textures
 {
@@ -101,39 +101,39 @@ typedef struct s_textures
 
 typedef struct s_color
 {
-	int		r;
-	int		g;
-	int		b;
-	int 	trgb;
+	int			r;
+	int			g;
+	int			b;
+	int			trgb;
 }				t_color;
 
 typedef struct s_map
 {
 	// int		ceiling;
 	// int		floor;
-	int		width;
-	int		height;
-	char	**map;//tiles
-	double	player_dir;
+	int			width;
+	int			height;
+	char **map; // tiles
+	double		player_dir;
 	t_color		floor;
 	t_color		ceiling;
 	t_textures	textures;
-	t_image	tex_n;
-	t_image	tex_e;
-	t_image	tex_s;
-	t_image	tex_w;
-}	t_map;
+	t_image		tex_n;
+	t_image		tex_e;
+	t_image		tex_s;
+	t_image		tex_w;
+}				t_map;
 
 typedef struct s_window
 {
-	int		width;
-	int		height;
-	void	*mlx;
-	void	*win;
-	t_image	buff;
-	t_coord	pixel;
-	int		time;
-}	t_window;
+	int			width;
+	int			height;
+	void		*mlx;
+	void		*win;
+	t_image		buff;
+	t_coord		pixel;
+	int			time;
+}				t_window;
 
 typedef struct s_ray
 {
@@ -146,7 +146,7 @@ typedef struct s_ray
 	t_coord		step;
 	int			hit;
 	int			side;
-}	t_ray;
+}				t_ray;
 
 typedef struct s_player
 {
@@ -158,7 +158,7 @@ typedef struct s_player
 	int			mov_lr;
 	int			rot_lr;
 	char		start_direction;
-}	t_player;
+}				t_player;
 
 typedef struct s_options
 {
@@ -178,18 +178,18 @@ typedef struct s_game
 	t_player	p;
 	t_ray		r;
 	t_options	o;
-}	t_game;
+}				t_game;
 
 /* Functions */
-int				arg_checker(int argc, char **argv, t_map *map); //temp
+int	arg_checker(int argc, char **argv, t_map *map); // temp
 
 /* Color */
 void			color_pixel(t_image *img, t_coord *px, int color);
 unsigned int	get_img_color(t_image *img, t_coord *px);
 
 /* Error */
-int				err_val(int ret); //temp
-int				err_str(char *str, int ret); //temp
+int	err_val(int ret);            // temp
+int	err_str(char *str, int ret); // temp
 
 /* Hooks */
 int				close_hook(void);
@@ -208,16 +208,13 @@ void			draw_wall(t_game *g);
 int				render(t_game *g);
 
 /* Init texture */
-int				init_texture(t_game *g, t_map *m); // mod
+int	init_texture(t_game *g, t_map *m); // mod
 
 /* Time */
 int				timestamp(void);
 void			sleeptill(int t);
 
-
-
-
-//fonctions fifi
+// fonctions fifi
 int				checkcub(char *file);
 int				ft_isdigit(int c);
 int				ft_atoi(const char *str);
@@ -233,7 +230,7 @@ int				open_file(char *file);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 void			parse_texture(char *line, char *id, t_game *g);
 char			*parse_map(int fd, t_game *g);
-int			init_game(t_game *g, char **av, int ac);
+int				init_game(t_game *g, char **av, int ac);
 int				check_textures(t_game *g);
 void			print_map(char **map);
 void			*ft_memset(void *ptr, int x, size_t n);
@@ -254,6 +251,6 @@ int				check_required_elements(t_game *g);
 void			free_strs(char **strs);
 void			find_player(t_game *g);
 int				count_pos(t_game *g);
-void	free_game(t_game *g);
-
+void			free_game(t_game *g);
+void			is_map_empty(char **map);
 #endif
