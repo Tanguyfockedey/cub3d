@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:36:40 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 17:09:40 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:16:44 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	draw_wall(t_game *g)
 
 int	render(t_game *g)
 {
-	int	oldtime;
 
 	if (g->p.mov_forward || g->p.mov_lr)
 		move(g);
@@ -85,7 +84,6 @@ int	render(t_game *g)
 		rotate(&g->p, 0.0873);
 	cast_rays(g);
 	mlx_put_image_to_window(g->w.mlx, g->w.win, g->w.buff.img, 0, 0);
-	oldtime = g->w.time;
 	sleeptill(g->w.time + 17);
 	g->w.time = timestamp();
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 17:38:55 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:16:36 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # include <sys/time.h>
 
 /* Screen resolution */
-# define WIDTH 1000
-# define HEIGHT 500
+# define WIDTH 2000
+# define HEIGHT 1000
 
 /* Texture resolution */
 # define TEX_WIDTH 64
@@ -41,6 +41,16 @@
 
 /* Key bindings */
 # ifdef __linux__
+#  define EXIT 17
+#  define ESC 65307
+#  define R_LEFT 65361
+#  define R_RIGHT 65363
+#  define LEFT 97
+#  define RIGHT 100
+#  define BACK 115
+#  define FORWARD 119
+#  define KEY_DOWN 2
+#  define KEY_UP 3
 
 # elif __APPLE__
 #  define EXIT 17

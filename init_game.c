@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:59:39 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 17:31:22 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:14:14 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static int	init_window(t_game *g, t_window *w)
 	if (!w->buff.addr)
 		return (err_str("No image adress.", 1));
 	mlx_hook(w->win, EXIT, 0, close_hook, g);
-	mlx_hook(w->win, KEY_DOWN, 0, key_down_handler, g);
-	mlx_hook(w->win, KEY_UP, 0, key_up_handler, g);
+	mlx_hook(w->win, KEY_DOWN, 1L << 0, key_down_handler, g);
+	mlx_hook(w->win, KEY_UP, 1L << 1, key_up_handler, g);
 	w->time = timestamp();
 	return (0);
 }
