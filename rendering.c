@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
+/*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:36:40 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/19 12:16:44 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:03:49 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,11 @@ static int	draw_area(t_game *g, int *draw_start, int *draw_end)
 
 	line_height = (int)(g->w.height / g->r.perp_wall_dist);
 	*draw_start = g->w.height / 2 - line_height / 2;
+	ft_printf("draw area\n");
 	if (*draw_start < 0)
 		*draw_start = 0;
 	*draw_end = *draw_start + line_height;
+	ft_printf("draw area 1\n");
 	if (*draw_end >= g->w.height)
 		*draw_end = g->w.height - 1;
 	return (line_height);
@@ -65,24 +67,29 @@ void	draw_wall(t_game *g)
 	g->w.pixel.y = 0;
 	while (g->w.pixel.y < g->w.height)
 	{
+		ft_printf("loop draw wall");
 		if (g->w.pixel.y < draw_start)
-			color_pixel(&g->w.buff, &g->w.pixel, g->m.ceiling);
+			color_pixel(&g->w.buff, &g->w.pixel, 0x00FF6347);
 		else if (g->w.pixel.y > draw_end)
-			color_pixel(&g->w.buff, &g->w.pixel, g->m.floor);
+			color_pixel(&g->w.buff, &g->w.pixel, 0x007CFC00);
 		else
 			texture_wall(g, step, &tex_pos);
 		g->w.pixel.y++;
 	}
+	ft_printf("draw wall is ending\n");
 }
 
 int	render(t_game *g)
 {
-
+	ft_printf("COUCOUJKSHDJAEHSDAH\n");
 	if (g->p.mov_forward || g->p.mov_lr)
 		move(g);
+	ft_printf("JHFSJDSHFJKDHSFKJDHS\n");
 	if (g->p.rot_lr)
 		rotate(&g->p, 0.0873);
+	ft_printf("JHFSJDSHFJKDHSFKJDHS\n");
 	cast_rays(g);
+	ft_printf("JHFSJDSHFJKDHSFKJDHS\n");
 	mlx_put_image_to_window(g->w.mlx, g->w.win, g->w.buff.img, 0, 0);
 	sleeptill(g->w.time + 17);
 	g->w.time = timestamp();

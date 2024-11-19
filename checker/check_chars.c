@@ -1,26 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   check_chars.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 15:18:41 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/19 15:36:09 by fimazouz         ###   ########.fr       */
+/*   Created: 2024/11/15 19:54:40 by fimazouz          #+#    #+#             */
+/*   Updated: 2024/11/19 15:36:42 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-int	main(int ac, char **av)
+int	check_chars(t_game *g)
 {
-	t_game	game;
+	int		y;
+	int		x;
+	char	*valid_chars;
+	char	*str;
 
-	init_game(&game, av, ac);
-	mlx_loop_hook(game.w.mlx, render, &game);
-	mlx_loop(game.w.mlx);
-
-	// free_strs(game.m.map);
-	// free_game(&game);
-	return(0);
+	valid_chars = "10NSEW";
+	y = 0;
+	while (g->m.map[y])
+	{
+		x = 0;
+		while (g->m.map[y][x])
+		{
+			str = ft_strchr(valid_chars, g->m.map[y][x]);
+			if (!str)
+			{
+				printf("Error\nInvalid char in map :");
+				printf(" '%c'", g->m.map[y][x]);
+				exit(1);
+			}
+			x++;
+			//free(str);
+		}
+		y++;
+	}
+	return (0);
 }

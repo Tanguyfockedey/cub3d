@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
+/*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/19 12:16:36 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:45:08 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,33 @@ typedef struct s_coord
 	int	y;
 }	t_coord;
 
+typedef struct s_textures
+{
+	char		*no_t;
+	char		*so_t;
+	char		*we_t;
+	char		*ea_t;
+}				t_textures;
+
+typedef struct s_color
+{
+	int		r;
+	int		g;
+	int		b;
+	int 	trgb;
+}				t_color;
+
 typedef struct s_map
 {
-	int		ceiling;
-	int		floor;
+	// int		ceiling;
+	// int		floor;
 	int		width;
 	int		height;
-	char	**tiles;
+	char	**map;//tiles
 	double	player_dir;
+	t_color		floor;
+	t_color		ceiling;
+	t_textures	textures;
 	t_image	tex_n;
 	t_image	tex_e;
 	t_image	tex_s;
@@ -138,14 +157,27 @@ typedef struct s_player
 	int			mov_forward;
 	int			mov_lr;
 	int			rot_lr;
+	char		start_direction;
 }	t_player;
+
+typedef struct s_options
+{
+	int			no;
+	int			so;
+	int			we;
+	int			ea;
+	int			f;
+	int			c;
+}				t_options;
 
 typedef struct s_game
 {
+	int			fd;
 	t_window	w;
 	t_map		m;
 	t_player	p;
 	t_ray		r;
+	t_options	o;
 }	t_game;
 
 /* Functions */
@@ -163,9 +195,6 @@ int				err_str(char *str, int ret); //temp
 int				close_hook(void);
 int				key_down_handler(int hook, t_game *g);
 int				key_up_handler(int hook, t_game *g);
-
-/* Init game */
-int				init_game(t_game *game); //mod
 
 /* Movememts */
 void			rotate(t_player *p, double rot);
@@ -185,7 +214,46 @@ int				init_texture(t_game *g, t_map *m); // mod
 int				timestamp(void);
 void			sleeptill(int t);
 
-/* Utils */
-void			print_map(t_map *map); //temp
+
+
+
+//fonctions fifi
+int				checkcub(char *file);
+int				ft_isdigit(int c);
+int				ft_atoi(const char *str);
+int				ft_strcmp(const char *s1, const char *s2);
+int				check_color(t_color *color);
+char			*ft_strnstr(const char *haystack, const char *needle,
+					size_t len);
+char			**ft_split(char const *s, char c);
+void			ft_free_split(char **array);
+int				parse_rgb(char *line, t_color *color);
+int				ft_findspace(char *line);
+int				open_file(char *file);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+void			parse_texture(char *line, char *id, t_game *g);
+char			*parse_map(int fd, t_game *g);
+int			init_game(t_game *g, char **av, int ac);
+int				check_textures(t_game *g);
+void			print_map(char **map);
+void			*ft_memset(void *ptr, int x, size_t n);
+void			get_map_size_and_fill(t_game *game);
+char			*ft_strcpyy(char *dest, const char *src);
+char			*trim_start(char *line);
+void			fill_map(t_game *g);
+void			get_map_size_fill(t_game *game);
+void			trim_newline(char *line);
+int				check_chars(t_game *g);
+int				is_map_surrounded_by_walls(t_game *g);
+char			*ft_strtrim(char const *s1, char const *set);
+void			size_map(t_game *g);
+void			stock_map(char *line, t_game *g);
+int				countcolums(t_game *g);
+int				countlines(t_game *g);
+int				check_required_elements(t_game *g);
+void			free_strs(char **strs);
+void			find_player(t_game *g);
+int				count_pos(t_game *g);
+void	free_game(t_game *g);
 
 #endif

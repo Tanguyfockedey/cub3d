@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
+/*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:37:17 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 16:47:03 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:00:13 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ static void	dda(t_game *g)
 			r->map.y += r->step.y;
 			r->side = 1;
 		}
-		if (g->m.tiles[r->map.x][r->map.y] > '0') //potential change
+		ft_printf("check\n");
+		if (g->m.map[r->map.x][r->map.y] > '0') //potential change
 			r->hit = 1;
+		ft_printf("check\n");
 	}
 }
 
@@ -116,8 +118,11 @@ int	cast_rays(t_game *g)
 		delta_dist(g);
 		start_dist(g);
 		dda(g);
+		ft_printf("finish dda\n");
 		wall_dist(g);
+		ft_printf("finish wall\n");
 		draw_wall(g);
+		ft_printf("finish draw wall\n");
 		g->w.pixel.x++;
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
+/*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:59:39 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/19 12:14:14 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:50:23 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,30 @@ static int	init_window(t_game *g, t_window *w)
 	return (0);
 }
 
-static int	init_map(t_game *g, t_map *m)
+static int	map(t_game *g)
 {
-	(void)g;
-	m->ceiling = 0x00b0faff;
-	m->floor = 0x005c0000;
-	m->player_dir = NORTH;
-	if (init_texture(g, &g->m))
-		exit(1);
-	return (0);
+	char	*line;
+
+	line = parse_map(g->fd, g);
+	check_required_elements(g);
+	stock_map(line, g);
+	size_map(g);
+	fill_map(g);
+	get_map_size_fill(g);
+	if (check_chars(g) == 1)
+		return (1);
+	if (is_map_surrounded_by_walls(g) == 1)
+		return (1);
+	if (count_pos(g) == 1)
+		return (1);
+	find_player(g);
+	return (0);	
+	// if (init_texture(g, &g->m))
+	// 	exit(1);
 }
 
 static int	init_player(t_game *g, t_player *p)
 {
-	p->pos.x = 5.5; // a changer
-	p->pos.y = 5.5; // a changer
 	p->dir.x = 0;
 	p->dir.y = -1;
 	p->plane.x = 0.66;
@@ -58,24 +67,33 @@ static int	init_player(t_game *g, t_player *p)
 	p->mov_forward = 0;
 	p->mov_lr = 0;
 	p->rot_lr = 1;
-	rotate(p, g->m.player_dir);
+	rotate(p, g->m.player_dir);//donnée a changer
 	p->rot_lr = 0;
 	return (0);
 }
 
-int	init_game(t_game *g)
+int	init_game(t_game *g, char **av, int ac)
 {
 	int	err;
 
+	if (ac != 2 || open_file(av[1]) == -1 || checkcub(av[1]) == 1)
+		return (printf("Error\nProblem wih file"), exit(1), 1);
 	err = init_window(g, &g->w);
-	if (err)
-		return (1);
-	err = init_map(g, &g->m);
 	if (err)
 		return (1);
 	err = init_player(g, &g->p);
 	if (err)
 		return (1);
-	print_map(&g->m);
+	g->fd = open_file(av[1]);
+	g->o.no = 0;
+	g->o.so = 0;
+	g->o.we = 0;
+	g->o.ea = 0;
+	g->o.f = 0;
+	g->o.c = 0;
+	g->m.width = 0;
+	g->m.height = 0;
+	map(g);
+	print_map(g->m.map);
 	return (0);
 }

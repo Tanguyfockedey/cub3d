@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
+/*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:14:35 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 17:10:51 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:41:37 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	move(t_game *g)
 		- (p->dir.y * p->mov_lr * 0.1);
 	next.y = p->pos.y + (p->dir.y * p->mov_forward * 0.1)
 		+ (p->dir.x * p->mov_lr * 0.1);
-	if (g->m.tiles[next.x][next.y] == ' ') //potentiellement remplacer par '0'
+	if (g->m.map[next.x][next.y] == ' ') //potentiellement remplacer par '0'
 	{
 		p->pos.x += p->dir.x * p->mov_forward * 0.05;
 		p->pos.y += p->dir.y * p->mov_forward * 0.05;

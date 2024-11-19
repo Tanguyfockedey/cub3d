@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 15:18:41 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/19 15:36:09 by fimazouz         ###   ########.fr       */
+/*   Created: 2024/11/19 15:12:56 by fimazouz          #+#    #+#             */
+/*   Updated: 2024/11/19 15:13:10 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int ac, char **av)
+void	free_strs(char **strs)
 {
-	t_game	game;
+	int	i;
 
-	init_game(&game, av, ac);
-	mlx_loop_hook(game.w.mlx, render, &game);
-	mlx_loop(game.w.mlx);
+	i = 0;
+	while (strs && strs[i])
+		free(strs[i++]);
+	free(strs);
+}
 
-	// free_strs(game.m.map);
-	// free_game(&game);
-	return(0);
+void	free_game(t_game *g)
+{
+	if (g->m.textures.no_t)
+		free(g->m.textures.no_t);
+	if (g->m.textures.so_t)
+		free(g->m.textures.so_t);
+	if (g->m.textures.we_t)
+		free(g->m.textures.we_t);
+	if (g->m.textures.ea_t)
+		free(g->m.textures.ea_t);
+	if (g->fd)
+		close(g->fd);
 }
