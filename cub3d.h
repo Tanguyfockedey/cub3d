@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/19 18:24:18 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/20 12:06:44 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ typedef struct s_map
 	// int		floor;
 	int			width;
 	int			height;
-	char **map; // tiles
+	char		**map; // tiles
 	double		player_dir;
 	t_color		floor;
 	t_color		ceiling;
@@ -157,7 +157,6 @@ typedef struct s_player
 	int			mov_forward;
 	int			mov_lr;
 	int			rot_lr;
-	char		start_direction;
 }				t_player;
 
 typedef struct s_options
@@ -181,76 +180,63 @@ typedef struct s_game
 }				t_game;
 
 /* Functions */
-int	arg_checker(int argc, char **argv, t_map *map); // temp
-
 /* Color */
 void			color_pixel(t_image *img, t_coord *px, int color);
 unsigned int	get_img_color(t_image *img, t_coord *px);
-
 /* Error */
-int	err_val(int ret);            // temp
-int	err_str(char *str, int ret); // temp
-
+int				err_str(char *str, int ret); // temp
 /* Hooks */
 int				close_hook(void);
 int				key_down_handler(int hook, t_game *g);
 int				key_up_handler(int hook, t_game *g);
-
 /* Movememts */
 void			rotate(t_player *p, double rot);
 void			move(t_game *g);
 
 /* Rays */
 int				cast_rays(t_game *g);
-
 /* Rendering */
 void			draw_wall(t_game *g);
 int				render(t_game *g);
-
 /* Init texture */
-int	init_texture(t_game *g, t_map *m); // mod
-
+int				init_texture(t_game *g, t_map *m); // mod
 /* Time */
 int				timestamp(void);
 void			sleeptill(int t);
-
-// fonctions fifi
+/* Checker */
 int				checkcub(char *file);
-int				ft_isdigit(int c);
-int				ft_atoi(const char *str);
-int				ft_strcmp(const char *s1, const char *s2);
 int				check_color(t_color *color);
-char			*ft_strnstr(const char *haystack, const char *needle,
-					size_t len);
-char			**ft_split(char const *s, char c);
-void			ft_free_split(char **array);
-int				parse_rgb(char *line, t_color *color);
-int				ft_findspace(char *line);
-int				open_file(char *file);
-int				ft_strncmp(const char *s1, const char *s2, size_t n);
-void			parse_texture(char *line, char *id, t_game *g);
-char			*parse_map(int fd, t_game *g);
-int				init_game(t_game *g, char **av, int ac);
+int				check_required_elements(t_game *g);
+int				count_pos(t_game *g);
+int				is_wall(t_game *g);
 int				check_textures(t_game *g);
-void			print_map(char **map);
-void			*ft_memset(void *ptr, int x, size_t n);
-void			get_map_size_and_fill(t_game *game);
-char			*ft_strcpyy(char *dest, const char *src);
-char			*trim_start(char *line);
+int				check_chars(t_game *g);
+void			is_map_empty(char **map);
+/* Parser */
+int				parse_rgb(char *line, t_color *color);
+void			parse_texture(char *line, char *id, t_game *g);
 void			fill_map(t_game *g);
 void			get_map_size_fill(t_game *game);
-void			trim_newline(char *line);
-int				check_chars(t_game *g);
-int				is_map_surrounded_by_walls(t_game *g);
-char			*ft_strtrim(char const *s1, char const *set);
 void			size_map(t_game *g);
 void			stock_map(char *line, t_game *g);
 int				countcolums(t_game *g);
 int				countlines(t_game *g);
-int				check_required_elements(t_game *g);
-void			free_strs(char **strs);
 void			find_player(t_game *g);
-int				count_pos(t_game *g);
+char			*parse_map(int fd, t_game *g);
+int				ft_strcmp(const char *s1, const char *s2);
+void			ft_free_split(char **array);
+/* Helper functions */
+int				ft_findspace(char *line);
+int				open_file(char *file);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+void			print_map(char **map);
+char			*ft_strcpyy(char *dest, const char *src);
+char			*trim_start(char *line);
+void			trim_newline(char *line);
+/* Free */
+void			free_strs(char **strs);
 void			free_game(t_game *g);
-void			is_map_empty(char **map);
+/* Init */
+int				init_game(t_game *g, char **av, int ac);
+
 #endif

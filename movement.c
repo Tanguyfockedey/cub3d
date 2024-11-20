@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:14:35 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/19 18:03:33 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:46:16 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	rotate(t_player *p, double rot)
 {
-	double		old_dir_x;
-	double		old_plane_x;
+	double	old_dir_x;
+	double	old_plane_x;
 
 	rot *= p->rot_lr;
 	old_dir_x = p->dir.x;
 	old_plane_x = p->plane.x;
 	p->dir.x = old_dir_x * cos(rot) - p->dir.y * sin(rot);
-	p->dir.y = old_dir_x * sin(rot) + p->dir.y * cos (rot);
+	p->dir.y = old_dir_x * sin(rot) + p->dir.y * cos(rot);
 	p->plane.x = old_plane_x * cos(rot) - p->plane.y * sin(rot);
 	p->plane.y = old_plane_x * sin(rot) + p->plane.y * cos(rot);
 }
@@ -32,11 +32,11 @@ void	move(t_game *g)
 	t_coord		next;
 
 	p = &g->p;
-	next.x = p->pos.x + (p->dir.x * p->mov_forward * 0.1)
-		- (p->dir.y * p->mov_lr * 0.1);
-	next.y = p->pos.y + (p->dir.y * p->mov_forward * 0.1)
-		+ (p->dir.x * p->mov_lr * 0.1);
-	if (g->m.map[next.x	][next.y] == '0') //potentiellement remplacer par '0'
+	next.x = p->pos.x + (p->dir.x * p->mov_forward * 0.1) - (p->dir.y
+			* p->mov_lr * 0.1);
+	next.y = p->pos.y + (p->dir.y * p->mov_forward * 0.1) + (p->dir.x
+			* p->mov_lr * 0.1);
+	if (g->m.map[next.x][next.y] == '0') // potentiellement remplacer par '0'
 	{
 		p->pos.x += p->dir.x * p->mov_forward * 0.05;
 		p->pos.y += p->dir.y * p->mov_forward * 0.05;

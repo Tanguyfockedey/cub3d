@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:00:40 by firdawssema       #+#    #+#             */
-/*   Updated: 2024/11/19 15:29:39 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/20 10:39:12 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,8 @@ void	parse_helper(char **values, t_color *color)
 	color->g = ft_atoi(values[1]);
 	color->b = ft_atoi(values[2]);
 	check_color(color);
-	// int i = 0;
-	// i = r << 8;
-	// i += g << 8;
-	// i += b;
-	// g->m.floor = i;
+	color->trgb = (0xFF << 24) | (color->r << 16) | (color->g << 8) | color->b;
+	printf("TRGB : %d", color->trgb);
 }
 
 int	parse_rgb(char *line, t_color *color)

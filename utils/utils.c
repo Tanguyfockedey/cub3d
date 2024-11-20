@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:51:48 by fimazouz          #+#    #+#             */
-/*   Updated: 2024/11/19 14:53:08 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:39:07 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char	*ft_strcpyy(char *dest, const char *src)
 		*d++ = *src++;
 	return (dest);
 }
-
 
 int	countcolums(t_game *g)
 {
@@ -68,6 +67,7 @@ int	countlines(t_game *g)
 	count++;
 	return (count);
 }
+
 void	trim_newline(char *line)
 {
 	int	len;
