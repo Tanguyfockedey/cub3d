@@ -6,11 +6,23 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 14:26:48 by fimazouz          #+#    #+#             */
-/*   Updated: 2024/11/20 10:27:32 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:02:54 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	find_dir(char dir, t_game *g)
+{
+	if (dir == 'N')
+		g->m.player_dir = NORTH;
+	else if (dir == 'E')
+		g->m.player_dir = EAST;
+	else if (dir == 'S')
+		g->m.player_dir = SOUTH;
+	else if (dir == 'W')
+		g->m.player_dir = WEST;
+}
 
 void	find_player(t_game *g)
 {
@@ -26,9 +38,9 @@ void	find_player(t_game *g)
 			if (g->m.map[y][x] == 'N' || g->m.map[y][x] == 'S'
 				|| g->m.map[y][x] == 'E' || g->m.map[y][x] == 'W')
 			{
-				g->p.pos.x = (double)y;
-				g->p.pos.y = (double)x;
-				g->m.player_dir = (double)g->m.map[y][x];
+				g->p.pos.x = (double)y + 0.5;
+				g->p.pos.y = (double)x + 0.5;
+				find_dir(g->m.map[y][x], g);
 				g->m.map[y][x] = '0';
 				printf("Start : %f", g->m.player_dir);
 				return ;

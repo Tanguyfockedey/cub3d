@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:37:17 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/19 17:59:45 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:04:05 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	dda(t_game *g)
 			r->map.y += r->step.y;
 			r->side = 1;
 		}
-		if (g->m.map[r->map.x][r->map.y] > '0') //potential change
+		if (g->m.map[r->map.x][r->map.y] > '0')
 			r->hit = 1;
 	}
 }

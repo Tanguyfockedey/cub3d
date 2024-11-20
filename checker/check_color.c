@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:00:40 by firdawssema       #+#    #+#             */
-/*   Updated: 2024/11/20 10:39:12 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:02:06 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int	ft_arraylen(char **array)
 
 void	parse_helper(char **values, t_color *color)
 {
+	int	i;
+
+	i = 0;
 	if (!is_numeric(values[0]) || !is_numeric(values[1])
 		|| !is_numeric(values[2]))
 		return (printf("Error\nColor values must be numeric\n"), exit(1));
@@ -55,7 +58,10 @@ void	parse_helper(char **values, t_color *color)
 	color->g = ft_atoi(values[1]);
 	color->b = ft_atoi(values[2]);
 	check_color(color);
-	color->trgb = (0xFF << 24) | (color->r << 16) | (color->g << 8) | color->b;
+	i += color->r << 16;
+	i += color->g << 8;
+	i += color->b;
+	color->trgb = i;
 	printf("TRGB : %d", color->trgb);
 }
 

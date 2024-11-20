@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/20 12:06:44 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/20 14:55:11 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@
 #  define KEY_DOWN 2
 #  define KEY_UP 3
 # endif
-# define NORTH 0
+# define NORTH 0.0
 # define EAST 1.57
 # define SOUTH 3.142
 # define WEST 4.71

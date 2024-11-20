@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:36:40 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/20 11:49:27 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:03:54 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	draw_area(t_game *g, int *draw_start, int *draw_end)
 	if (*draw_start >= g->w.height || *draw_end < 0)
 	{
 		printf("Erreur: Zone de dessin invalide\n");
-		return (-1); // Indique un problème.
+		return (-1);
 	}
 	return (line_height);
 }
@@ -79,9 +79,9 @@ void	draw_wall(t_game *g)
 	while (g->w.pixel.y < g->w.height)
 	{
 		if (g->w.pixel.y < draw_start)
-			color_pixel(&g->w.buff, &g->w.pixel, 0x00FF6347);
+			color_pixel(&g->w.buff, &g->w.pixel, g->m.floor.trgb);
 		else if (g->w.pixel.y > draw_end)
-			color_pixel(&g->w.buff, &g->w.pixel, 0x007CFC00);
+			color_pixel(&g->w.buff, &g->w.pixel, g->m.ceiling.trgb);
 		else
 			texture_wall(g, step, &tex_pos);
 		g->w.pixel.y++;
