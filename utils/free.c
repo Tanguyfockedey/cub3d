@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 15:01:31 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 16:17:33 by tafocked         ###   ########.fr       */
+/*   Created: 2024/11/19 15:12:56 by fimazouz          #+#    #+#             */
+/*   Updated: 2024/11/21 15:20:50 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-void	color_pixel(t_image *img, t_coord *px, int color)
+void	free_strs(char **strs)
 {
-	char	*addr;
+	int	i;
 
-	addr = img->addr + (px->y * img->size_line + px->x * img->bpp / 8);
-	*(unsigned int *)addr = color;
+	i = 0;
+	while (strs && strs[i])
+		free(strs[i++]);
+	free(strs);
 }
 
-unsigned int	get_img_color(t_image *img, t_coord *px)
+void	free_game(t_game *g)
 {
-	unsigned int	color;
-	char			*addr;
-
-	addr = img->addr + (px->y * img->size_line + px->x * (img->bpp / 8));
-	color = *(unsigned int *)addr;
-	return (color);
+	if (g->m.textures.no_t)
+		free(g->m.textures.no_t);
+	if (g->m.textures.so_t)
+		free(g->m.textures.so_t);
+	if (g->m.textures.we_t)
+		free(g->m.textures.we_t);
+	if (g->m.textures.ea_t)
+		free(g->m.textures.ea_t);
+	if (g->fd)
+		close(g->fd);
 }

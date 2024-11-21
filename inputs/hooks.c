@@ -6,11 +6,11 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:44:36 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/16 15:41:04 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:18:34 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	close_hook(void)
 {

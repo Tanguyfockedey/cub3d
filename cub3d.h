@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/20 14:55:11 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:14:25 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,6 @@ void			trim_newline(char *line);
 void			free_strs(char **strs);
 void			free_game(t_game *g);
 /* Init */
-int				init_game(t_game *g, char **av, int ac);
+void			init_game(t_game *g, char **av, int ac);
 
 #endif

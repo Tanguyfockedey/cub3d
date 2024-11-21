@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 18:15:26 by tafocked          #+#    #+#             */
-/*   Updated: 2024/10/22 13:05:11 by tafocked         ###   ########.fr       */
+/*   Created: 2024/11/14 14:40:16 by tafocked          #+#    #+#             */
+/*   Updated: 2024/11/21 15:20:34 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-int	err_val(int err)
+int	timestamp(void)
 {
-	if (err != 0)
-		errno = err;
-	ft_putstr_fd("Error : ", STDERR_FILENO);
-	ft_putstr_fd(strerror(errno), STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
-	return (errno);
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	return (t.tv_sec * 1000 + t.tv_usec / 1000);
 }
 
-int	err_str(char *str, int err)
+void	sleeptill(int t)
 {
-	ft_putstr_fd("Error : ", STDERR_FILENO);
-	ft_putstr_fd(str, STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
-	return (err);
+	while (timestamp() < t)
+		usleep(100);
 }

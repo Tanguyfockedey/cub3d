@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:59:39 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/20 15:04:28 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:21:55 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 static int	init_window(t_game *g, t_window *w)
 {
@@ -36,10 +36,16 @@ static int	init_window(t_game *g, t_window *w)
 	return (0);
 }
 
-static int	map(t_game *g)
+static int	init_map(t_game *g, int ac, char **av)
 {
 	char	*line;
 
+	if (ac != 2 || open_file(av[1]) == -1 || checkcub(av[1]) == 1)
+		return (printf("Error\nProblem wih file"), exit(1), 1);
+	g->fd = open_file(av[1]); //pourquoi ouvrir le fichier 2x ?
+	g->file = av[1]; //je ne vois nulle part ou cette variable est utilisée
+	g->m.width = 0;
+	g->m.height = 0;
 	line = parse_map(g->fd, g);
 	check_required_elements(g);
 	stock_map(line, g);
@@ -55,11 +61,11 @@ static int	map(t_game *g)
 		return (1);
 	find_player(g);
 	if (init_texture(g, &g->m))
-		exit(1);
+		return (1);
 	return (0);
 }
 
-static int	init_player(t_game *g, t_player *p)
+static void	init_player(t_game *g, t_player *p)
 {
 	p->dir.x = 0;
 	p->dir.y = -1;
@@ -70,32 +76,25 @@ static int	init_player(t_game *g, t_player *p)
 	p->rot_lr = 1;
 	rotate(p, g->m.player_dir);
 	p->rot_lr = 0;
-	return (0);
 }
 
-int	init_game(t_game *g, char **av, int ac)
+static void	init_options(t_game *g)
 {
-	int	err;
-
-	if (ac != 2 || open_file(av[1]) == -1 || checkcub(av[1]) == 1)
-		return (printf("Error\nProblem wih file"), exit(1), 1);
-	err = init_window(g, &g->w);
-	if (err)
-		return (1);
-	g->fd = open_file(av[1]);
-	g->file = av[1];
 	g->o.no = 0;
 	g->o.so = 0;
 	g->o.we = 0;
 	g->o.ea = 0;
 	g->o.f = 0;
 	g->o.c = 0;
-	g->m.width = 0;
-	g->m.height = 0;
-	map(g);
-	err = init_player(g, &g->p);
-	if (err)
-		return (1);
+}
+
+void	init_game(t_game *g, char **av, int ac)
+{
+	init_options(g);
+	if (init_map(g, ac, av))
+		exit(1);
+	if (init_window(g, &g->w))
+		exit(1);
+	init_player(g, &g->p);
 	print_map(g->m.map);
-	return (0);
 }

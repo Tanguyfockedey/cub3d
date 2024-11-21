@@ -3,57 +3,38 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+         #
+#    By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 16:37:10 by tafocked          #+#    #+#              #
-#    Updated: 2024/11/21 12:03:10 by fimazouz         ###   ########.fr        #
+#    Updated: 2024/11/21 15:45:02 by tafocked         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Nom du programme
-NAME	= cub3D
+NAME    = cub3D
 
 # Compilation
-CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -g #-fsanitize=address
+CC      = cc
+CFLAGS  = -Wall -Wextra -Werror -g #-fsanitize=address
 
 # Détection du système
-UNAME	= $(shell uname)
+UNAME   = $(shell uname)
 ifeq ($(UNAME), Darwin)
-LDLIBS	= includes/libft_updated/libft.a -lmlx -framework OpenGL -framework AppKit
+	LDLIBS  = includes/libft_updated/libft.a -lmlx -framework OpenGL -framework AppKit
 endif
 ifeq ($(UNAME), Linux)
-LDLIBS	= includes/libft_updated/libft.a -Lincludes/mlx_linux -lmlx -Iincludes/mlx_linux -lXext -lX11 -lm
+	LDLIBS  = includes/libft_updated/libft.a -Lincludes/mlx_linux -lmlx -Iincludes/mlx_linux -lXext -lX11 -lm
 endif
 
 # Répertoires
 SRC_DIR = ./
 OBJ_DIR = .obj
-CHECKER_DIR = checker
-PARSER_DIR = parser
-TEXTURE_DIR = textures
-UTILS_DIR = utils
 LIBFT_DIR = includes/libft_updated
 
-# Liste des fichiers sources
-SRC_FILES = \
-	cub3d.c \
-	color.c \
-	error.c \
-	free.c \
-	hooks.c \
-	init_game.c \
-	movement.c \
-	rays.c \
-	rendering.c \
-	textures.c \
-	time.c \
-	$(addprefix $(CHECKER_DIR)/, check_chars.c check_color.c check_player.c check_textures.c check_walls.c extension_cub.c) \
-	$(addprefix $(PARSER_DIR)/, fill_map.c read_map.c) \
-	$(addprefix $(UTILS_DIR)/, utils.c utils_1.c)
-
+# Recherche des fichiers source
+SRC_FILES = $(shell find $(SRC_DIR) -path $(SRC_DIR)includes -prune -o -type f -name '*.c' -print)
 # Génération des objets
-OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
+OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:$(SRC_DIR)%.c=%.o))
 
 # Règle par défaut
 all: libs $(NAME)
@@ -87,6 +68,7 @@ re: fclean all
 libs:
 	$(MAKE) -C $(LIBFT_DIR)
 ifeq ($(UNAME), Linux)
+	$(CFLAGS) = -g
 	$(MAKE) -C includes/mlx_linux
 endif
 
