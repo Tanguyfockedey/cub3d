@@ -50,7 +50,7 @@ static int	check_interior(t_game *g, int x, int y)
 			|| g->m.map[x][y - 1] == ' ' || g->m.map[x][y + 1] == ' '
 			|| g->m.map[x - 1][y] == '\0' || g->m.map[x + 1][y] == '\0'
 			|| g->m.map[x][y - 1] == '\0' || g->m.map[x][y + 1] == '\0')
-			return (printf("Error\nMap is not surrounded by wallslol.\n"),
+			return (printf("Error\nMap is not surrounded by walls.\n"),
 				exit(1), 1);
 	}
 	return (0);

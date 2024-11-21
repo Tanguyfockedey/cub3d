@@ -39,20 +39,6 @@ int	ft_findspace(char *line)
 	return (-1);
 }
 
-int	check_textures(t_game *g)
-{
-	if (open_file(g->m.textures.no_t) == -1)
-		return (ft_printf("Error\nCould not open NO texture file.\n"), exit(1),
-			1);
-	if (open_file(g->m.textures.so_t) == -1)
-		return (printf("Error\nCould not open SO texture file.\n"), exit(1), 1);
-	if (open_file(g->m.textures.we_t) == -1)
-		return (printf("Error\nCould not open WE texture file.\n"), exit(1), 1);
-	if (open_file(g->m.textures.ea_t) == -1)
-		return (printf("Error\nCould not open EA texture file.\n"), exit(1), 1);
-	return (0);
-}
-
 void	parse_texture(char *line, char *id, t_game *g)
 {
 	char	*path;

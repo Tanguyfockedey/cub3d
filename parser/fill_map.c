@@ -53,7 +53,7 @@ void	size_map(t_game *g)
 	}
 	g->m.height = i;
 	printf("height : %d \n", g->m.height);
-	printf("width : %d ", g->m.width);
+	ft_printf("width : %d ", g->m.width);
 }
 
 void	get_map_size_fill(t_game *game)

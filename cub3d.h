@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/21 16:07:25 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:52:54 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,9 @@ typedef struct s_color
 
 typedef struct s_map
 {
-	// int		ceiling;
-	// int		floor;
 	int			width;
 	int			height;
-	char		**map; // tiles
+	char		**map;
 	double		player_dir;
 	t_color		floor;
 	t_color		ceiling;
@@ -211,7 +209,6 @@ int				check_color(t_color *color);
 int				check_required_elements(t_game *g);
 int				count_pos(t_game *g);
 int				is_wall(t_game *g);
-int				check_textures(t_game *g);
 int				check_chars(t_game *g);
 void			is_map_empty(char **map);
 /* Parser */
@@ -235,6 +232,8 @@ void			print_map(char **map);
 char			*ft_strcpyy(char *dest, const char *src);
 char			*trim_start(char *line);
 void			trim_newline(char *line);
+int				is_empty_line(char *line);
+int				count_lines_map(char *line, t_game *g);
 /* Free */
 void			free_strs(char **strs);
 void			free_game(t_game *g);
