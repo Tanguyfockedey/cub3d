@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:59:36 by fimazouz          #+#    #+#             */
-/*   Updated: 2024/11/19 15:46:05 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/21 11:56:10 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,12 @@ void	stock_map(char *line, t_game *g)
 		else
 		{
 			trim_newline(line);
+			while (*line == ' ' || *line == '\t')
+				line++;
 			printf("Ligne de carte lue : %s\n", line);
 			g->m.map[i++] = ft_strdup(line);
 		}
-		free(line);
+		// free(line);
 		line = get_next_line(g->fd);
 	}
 	g->m.map[i] = NULL;

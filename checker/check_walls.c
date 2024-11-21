@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 20:01:51 by fimazouz          #+#    #+#             */
-/*   Updated: 2024/11/20 10:25:39 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/21 11:58:02 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,25 @@ static int	check_borders(t_game *g)
 	int	y;
 	int	len;
 
-	x = 0;
-	while (x < g->m.height)
+	x = -1;
+	while (++x < g->m.height)
 	{
 		len = ft_strlen(g->m.map[x]);
 		if (x == 0 || x == g->m.height - 1)
 		{
-			y = 0;
-			while (y < len)
+			y = -1;
+			while (++y < len)
 			{
-				if (g->m.map[x][y] != '1' && g->m.map[x][y] != ' ')
+				if (g->m.map[x][y] != '1' && g->m.map[x][y] != ' '
+					&& g->m.map[x][y] != '\t')
 					return (printf("Error\nMap is not surrounded by walls.\n"),
 						exit(1), 1);
-				y++;
 			}
 		}
-		else if (g->m.map[x][0] != '1' || g->m.map[x][len - 1] != '1')
+		else if ((g->m.map[x][0] != '1' && g->m.map[x][0] != ' '
+				&& g->m.map[x][0] != '\t') || g->m.map[x][len - 1] != '1')
 			return (printf("Error\nMap is not surrounded by walls.\n"), exit(1),
 				1);
-		x++;
 	}
 	return (0);
 }
@@ -50,8 +50,8 @@ static int	check_interior(t_game *g, int x, int y)
 			|| g->m.map[x][y - 1] == ' ' || g->m.map[x][y + 1] == ' '
 			|| g->m.map[x - 1][y] == '\0' || g->m.map[x + 1][y] == '\0'
 			|| g->m.map[x][y - 1] == '\0' || g->m.map[x][y + 1] == '\0')
-			return (printf("Error\nMap is not surrounded by walls.\n"), exit(1),
-				1);
+			return (printf("Error\nMap is not surrounded by wallslol.\n"),
+				exit(1), 1);
 	}
 	return (0);
 }

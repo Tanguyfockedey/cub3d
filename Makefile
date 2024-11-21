@@ -6,7 +6,7 @@
 #    By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 16:37:10 by tafocked          #+#    #+#              #
-#    Updated: 2024/11/19 15:34:08 by fimazouz         ###   ########.fr        #
+#    Updated: 2024/11/21 12:03:10 by fimazouz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME	= cub3D
 
 # Compilation
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -g #-fsanitize=thread
+CFLAGS	= -Wall -Wextra -Werror -g #-fsanitize=address
 
 # Détection du système
 UNAME	= $(shell uname)
