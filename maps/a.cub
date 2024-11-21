@@ -3,11 +3,11 @@ SO ./textures/glass.xpm
 WE ./textures/rocks.xpm
 EA ./textures/bookshelf.xpm
 
-F 220,100,0
 C 225,30,0
+F 220,100,0
 
-111111
-100101
+    111111
+    100101
 101001
 1100N1
 11111

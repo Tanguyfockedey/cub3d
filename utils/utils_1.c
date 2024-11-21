@@ -26,9 +26,6 @@ void	print_map(char **map)
 
 void	is_map_empty(char **map)
 {
-	int	i;
-
-	i = 0;
 	if (map == NULL || map[0] == NULL)
 	{
 		printf("Error\nMap is empty.");

@@ -22,6 +22,6 @@ int	main(int ac, char **av)
 	
 	free_strs(game.m.map);
 	free_game(&game);
-	system("leaks cub3D");
+	//system("leaks cub3D");
 	return (0);
 }

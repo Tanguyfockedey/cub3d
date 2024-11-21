@@ -83,6 +83,7 @@ int	init_game(t_game *g, char **av, int ac)
 	if (err)
 		return (1);
 	g->fd = open_file(av[1]);
+	g->file = av[1];
 	g->o.no = 0;
 	g->o.so = 0;
 	g->o.we = 0;

@@ -30,6 +30,7 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
+#include <stdint.h>
 
 /* Screen resolution */
 # define WIDTH 2000
@@ -172,6 +173,7 @@ typedef struct s_options
 typedef struct s_game
 {
 	int			fd;
+	char		*file;
 	t_window	w;
 	t_map		m;
 	t_player	p;
