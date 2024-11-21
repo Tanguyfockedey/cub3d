@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/21 15:14:25 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:07:25 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ typedef struct s_game
 void			color_pixel(t_image *img, t_coord *px, int color);
 unsigned int	get_img_color(t_image *img, t_coord *px);
 /* Error */
-int				err_str(char *str, int ret); // temp
+int				err_str(char *str, int ret);
 /* Hooks */
 int				close_hook(void);
 int				key_down_handler(int hook, t_game *g);
@@ -201,7 +201,7 @@ int				cast_rays(t_game *g);
 void			draw_wall(t_game *g);
 int				render(t_game *g);
 /* Init texture */
-int				init_texture(t_game *g, t_map *m); // mod
+void			init_texture(t_game *g, t_map *m);
 /* Time */
 int				timestamp(void);
 void			sleeptill(int t);

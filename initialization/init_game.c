@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:59:39 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/21 15:21:55 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:09:59 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ static int	init_window(t_game *g, t_window *w)
 	w->height = HEIGHT;
 	w->mlx = mlx_init();
 	if (!w->mlx)
-		return (err_str("Initialisation of mlx failed.", 1));
+		return (err_str("Initialization of mlx failed.", 1));
 	w->win = mlx_new_window(w->mlx, w->width, w->height, "Cub3d");
 	if (!w->win)
-		return (err_str("Initilisation of window failed.", 1));
+		return (err_str("Initilization of window failed.", 1));
 	w->buff.img = mlx_new_image(w->mlx, w->width, w->height);
 	if (!w->buff.img)
-		return (err_str("Initialisation of image failed.", 1));
+		return (err_str("Initialization of image failed.", 1));
 	w->buff.addr = mlx_get_data_addr(w->buff.img, &w->buff.bpp,
 			&w->buff.size_line, &w->buff.endian);
 	if (!w->buff.addr)
-		return (err_str("No image adress.", 1));
+		return (err_str("No window image address.", 1));
 	mlx_hook(w->win, EXIT, 0, close_hook, g);
 	mlx_hook(w->win, KEY_DOWN, 1L << 0, key_down_handler, g);
 	mlx_hook(w->win, KEY_UP, 1L << 1, key_up_handler, g);
@@ -60,8 +60,7 @@ static int	init_map(t_game *g, int ac, char **av)
 	if (check_chars(g) == 1)
 		return (1);
 	find_player(g);
-	if (init_texture(g, &g->m))
-		return (1);
+	init_texture(g, &g->m);
 	return (0);
 }
 
