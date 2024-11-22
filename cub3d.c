@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
+/*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:18:41 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/21 16:48:37 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:23:01 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,5 @@ int	main(int ac, char **av)
 	mlx_loop(game.w.mlx);
 	free_strs(game.m.map);
 	free_game(&game);
-	//system("leaks cub3D");
 	return (0);
 }

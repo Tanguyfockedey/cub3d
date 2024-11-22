@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_map.c                                         :+:      :+:    :+:   */
+/*   read_map2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:59:36 by fimazouz          #+#    #+#             */
-/*   Updated: 2024/11/21 11:56:10 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:16:39 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	create_map(char *line, t_game *g, int lines, int fd)
 {
 	int	i;
 
-	g->m.map = malloc(sizeof(char *) * lines + 1);
+	g->m.map = malloc(sizeof(char *) * (lines + 1));
 	if (!g->m.map)
 		return ;
 	i = 0;
@@ -30,8 +30,6 @@ void	create_map(char *line, t_game *g, int lines, int fd)
 		else
 		{
 			trim_newline(line);
-			// line = trim_start(line);
-			printf("Ligne de carte lue : %s\n", line);
 			g->m.map[i++] = ft_strdup(line);
 			line = get_next_line(g->fd);
 		}
@@ -43,11 +41,26 @@ void	create_map(char *line, t_game *g, int lines, int fd)
 
 void	check_if_line_exists(char *line)
 {
-	if(line == NULL)
+	if (line == NULL)
 	{
 		printf("Error\nEmpty map.");
 		exit(1);
 	}
+}
+
+char	*helper_stock(char *line)
+{
+	trim_newline(line);
+	line = trim_start(line);
+	return (line);
+}
+
+void	helperstock1(char *line, char **buff, char **cpy_line)
+{
+	check_if_line_exists(line);
+	*buff = ft_strdup(line);
+	line = trim_start(line);
+	*cpy_line = ft_strdup(line);
 }
 
 void	stock_map(char *line, t_game *g)
@@ -55,10 +68,9 @@ void	stock_map(char *line, t_game *g)
 	int		lines;
 	char	*cpy_line;
 	int		fd;
+	char	*buff;
 
-	check_if_line_exists(line);
-	line = trim_start(line);
-	cpy_line = ft_strdup(line);
+	helperstock1(line, &buff, &cpy_line);
 	lines = count_lines_map(line, g);
 	fd = open_file(g->file);
 	line = get_next_line(fd);
@@ -70,12 +82,10 @@ void	stock_map(char *line, t_game *g)
 			line = get_next_line(fd);
 			continue ;
 		}
-		trim_newline(line);
-		while (*line == ' ' || *line == '\t')
-			line++;
+		line = helper_stock(line);
 		if (ft_strncmp(line, cpy_line, ft_strlen(line)) == 0)
 			break ;
 		line = get_next_line(fd);
 	}
-	create_map(line, g, lines, fd);
+	create_map(buff, g, lines, fd);
 }

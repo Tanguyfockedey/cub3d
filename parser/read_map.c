@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:59:36 by fimazouz          #+#    #+#             */
-/*   Updated: 2024/11/21 11:56:10 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:40:52 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ char	*parse_map(int fd, t_game *g)
 		free(line);
 		line = get_next_line(fd);
 	}
-	printf("NO: %d, SO: %d, WE: %d, EA: %d, F: %d, C: %d\n", g->o.no, g->o.so,
-		g->o.we, g->o.ea, g->o.f, g->o.c);
 	return (line);
 }
 

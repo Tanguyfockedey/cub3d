@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
+/*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:19:10 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/21 16:52:54 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:56:16 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
-#include <stdint.h>
+# include <stdint.h>
 
 /* Screen resolution */
 # define WIDTH 2000
@@ -73,11 +73,11 @@
 /* Structures */
 typedef struct s_image
 {
-	void		*img;
-	char		*addr;
-	int			bpp;
-	int			size_line;
-	int			endian;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
 }				t_image;
 
 typedef struct s_vector

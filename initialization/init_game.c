@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
+/*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:59:39 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/21 17:30:06 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:23:28 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ static void	init_map(t_game *g, int ac, char **av)
 {
 	char	*line;
 
-	if (ac != 2 || open_file(av[1]) == -1 || checkcub(av[1]) == 1)
+	if (ac != 2 || checkcub(av[1]) == 1)
 		return (printf("Error\nProblem wih file"), exit(1));
-	g->fd = open_file(av[1]); //pourquoi ouvrir le fichier 2x ?
-	g->file = av[1]; //je ne vois nulle part ou cette variable est utilisée
+	g->fd = open_file(av[1]);
+	g->file = av[1];
 	g->m.width = 0;
 	g->m.height = 0;
 	line = parse_map(g->fd, g);
@@ -91,5 +91,4 @@ void	init_game(t_game *g, char **av, int ac)
 	init_window(g, &g->w);
 	init_map(g, ac, av);
 	init_player(g, &g->p);
-	print_map(g->m.map);
 }

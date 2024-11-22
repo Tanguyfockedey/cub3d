@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:00:40 by firdawssema       #+#    #+#             */
-/*   Updated: 2024/11/20 15:02:06 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:08:37 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	parse_helper(char **values, t_color *color)
 	i += color->g << 8;
 	i += color->b;
 	color->trgb = i;
-	printf("TRGB : %d", color->trgb);
 }
 
 int	parse_rgb(char *line, t_color *color)

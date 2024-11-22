@@ -6,7 +6,7 @@
 /*   By: fimazouz <fimazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:44:18 by fimazouz          #+#    #+#             */
-/*   Updated: 2024/11/19 14:59:37 by fimazouz         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:23:17 by fimazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ int	open_file(char *file)
 	int	fd;
 
 	fd = open(file, O_RDONLY);
+	if (fd == -1)
+	{
+		printf("Error\nOpening file\n");
+		exit(1);
+	}
 	return (fd);
 }
 
