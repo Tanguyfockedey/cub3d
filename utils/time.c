@@ -6,7 +6,7 @@
 /*   By: tafocked <tafocked@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:40:16 by tafocked          #+#    #+#             */
-/*   Updated: 2024/11/21 15:20:34 by tafocked         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:01:47 by tafocked         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ int	timestamp(void)
 void	sleeptill(int t)
 {
 	while (timestamp() < t)
-		usleep(100);
+		;
 }
